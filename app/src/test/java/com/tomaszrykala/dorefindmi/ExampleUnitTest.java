@@ -17,6 +17,11 @@ import static com.tomaszrykala.dorefindmi.Note.SO;
 
 public class ExampleUnitTest {
 
+    // TODO: Mock
+    private LedStrip ledStrip = new LedStrip();
+    private Buzzer buzzer = new Buzzer();
+    // private Game game = new Game(StepsGenerator.steps(), new LedStrip(), new Buzzer());
+
     @Test
     public void testNotes() throws Exception {
         Assert.assertEquals("DO_LO", DO_LO.pitch);
@@ -78,13 +83,48 @@ public class ExampleUnitTest {
     @Test
     public void testGame() {
         final List<Step> steps = StepsGenerator.steps();
-        final Game game = new Game(steps);
+        final Game game = new Game(steps, ledStrip, buzzer);
         Assert.assertTrue(game.isStarted());
         for (int i = 0; i < steps.size(); i++) {
             final Step step = steps.get(i);
+            final Note note = step.getNote();
+
             Assert.assertTrue(game.onPad(step.getPad()));
+            Assert.assertTrue(ledStrip.isLitAt(note.led));
+            Assert.assertTrue(buzzer.lastBuzzedAt(note));
         }
         Assert.assertTrue(game.isWon());
         Assert.assertFalse(game.isStarted());
+    }
+
+    @Test
+    public void testGameController() {
+        final List<Step> steps = StepsGenerator.steps();
+        final AbcButtonsPad abcButtonsPad = new AbcButtonsPad();
+        final DigiDisplay digiDisplay = new DigiDisplay();
+        final Timer timer = new Timer(digiDisplay);
+
+        final GameController gameController = new GameController(
+                abcButtonsPad,
+                digiDisplay,
+                timer,
+                new Game(steps, new LedStrip(), new Buzzer())
+        );
+
+        Assert.assertTrue(gameController.isStarted());
+
+        for (int i = 0; i < steps.size(); i++) {
+            final Pad pad = steps.get(i).getPad();
+            Assert.assertTrue(digiDisplay.isRunning());
+            Assert.assertTrue(gameController.onPad(pad));
+            Assert.assertTrue(abcButtonsPad.isLastPressed(pad));
+            if (i < steps.size() - 1) Assert.assertTrue(abcButtonsPad.isEnabled());
+        }
+
+        Assert.assertTrue(gameController.isWon());
+        Assert.assertFalse(abcButtonsPad.isEnabled());
+        Assert.assertFalse(digiDisplay.isRunning());
+        Assert.assertFalse(gameController.isStarted());
+        Assert.assertEquals(digiDisplay.get(), timer.get());
     }
 }
