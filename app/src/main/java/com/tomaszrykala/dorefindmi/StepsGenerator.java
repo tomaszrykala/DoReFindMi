@@ -1,5 +1,7 @@
 package com.tomaszrykala.dorefindmi;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,28 +26,51 @@ class StepsGenerator {
 
     private final List<Note> notes = new ArrayList<>(Arrays.asList(
             new Note[]{DO_LO, RE, MI, FA, SO, LA, SI, DO_HI}));
-
     private final Pad[] pads = new Pad[]{A, B, C};
+    private final Generator generator;
 
-    private StepsGenerator() {
-        // no outside instances
+    StepsGenerator(Generator generator) {
+        this.generator = generator;
     }
 
-    static List<Step> steps() {
-        final List<Step> steps = new LinkedList<>();
-        final StepsGenerator generator = new StepsGenerator();
-        while (!generator.notes.isEmpty()) {
-            final Pad pad = generator.pads[new Random().nextInt(generator.pads.length)];
-            final Note note = generator.notes.remove(new Random().nextInt(generator.notes.size()));
-            steps.add(new Step(pad, note));
-        }
+    List<Step> steps() {
+        return generator.getSteps(notes, pads);
+    }
 
-        Collections.sort(steps, new Comparator<Step>() {
-            @Override public int compare(Step o1, Step o2) {
-                return o1.getNote().order - o2.getNote().order;
+    static class RealGenerator implements Generator {
+
+        @NonNull @Override public List<Step> getSteps(List<Note> notes, Pad[] pads) {
+            final List<Step> steps = new LinkedList<>();
+            while (!notes.isEmpty()) {
+                final Pad pad = pads[new Random().nextInt(pads.length)];
+                final Note note = notes.remove(new Random().nextInt(notes.size()));
+                steps.add(new Step(pad, note));
             }
-        });
 
-        return steps;
+            Collections.sort(steps, new Comparator<Step>() {
+                @Override public int compare(Step o1, Step o2) {
+                    return o1.getNote().order - o2.getNote().order;
+                }
+            });
+            return steps;
+        }
+    }
+
+    static class MockGenerator implements Generator {
+
+        @NonNull @Override public List<Step> getSteps(List<Note> notes, Pad[] pads) {
+            final Step[] steps = {
+                    new Step(Pad.A, Note.DO_LO),
+                    new Step(Pad.B, Note.RE),
+                    new Step(Pad.C, Note.MI),
+                    new Step(Pad.A, Note.FA),
+                    new Step(Pad.B, Note.SO),
+                    new Step(Pad.C, Note.LA),
+                    new Step(Pad.A, Note.SI),
+                    new Step(Pad.B, Note.DO_HI),
+            };
+            final List<Step> stepList = Arrays.asList(steps);
+            return new LinkedList<>(stepList);
+        }
     }
 }

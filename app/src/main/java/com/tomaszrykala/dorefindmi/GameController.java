@@ -29,6 +29,7 @@ class GameController implements PadListener {
     }
 
     private void restart() {
+        abcButtonsPad.setLastPressed(null);
         game.start();
     }
 

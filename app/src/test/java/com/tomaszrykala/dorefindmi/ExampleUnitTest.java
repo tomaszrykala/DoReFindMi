@@ -68,7 +68,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testStepsGenerator() {
-        final List<Step> steps = StepsGenerator.steps();
+        final List<Step> steps = givenARealStepsGenerator();
         Assert.assertEquals(8, steps.size());
         Assert.assertEquals(DO_LO, steps.get(0).getNote());
         Assert.assertEquals(RE, steps.get(1).getNote());
@@ -81,8 +81,8 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testGame() {
-        final List<Step> steps = StepsGenerator.steps();
+    public void testGame_wonInOne() {
+        final List<Step> steps = givenARealStepsGenerator();
         final Game game = new Game(steps, ledStrip, buzzer);
         Assert.assertTrue(game.isStarted());
         for (int i = 0; i < steps.size(); i++) {
@@ -98,8 +98,8 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void testGameController() {
-        final List<Step> steps = StepsGenerator.steps();
+    public void testGameController_whenWon() {
+        final List<Step> steps = givenARealStepsGenerator();
         final AbcButtonsPad abcButtonsPad = new AbcButtonsPad();
         final DigiDisplay digiDisplay = new DigiDisplay();
         final Timer timer = new Timer(digiDisplay);
@@ -126,5 +126,70 @@ public class ExampleUnitTest {
         Assert.assertFalse(digiDisplay.isRunning());
         Assert.assertFalse(gameController.isStarted());
         Assert.assertEquals(digiDisplay.get(), timer.get());
+    }
+
+    @Test
+    public void testGameController_whenHitMissHitHitMissWon() {
+        final List<Step> steps = givenAMockStepsGenerator();
+        final AbcButtonsPad abcButtonsPad = new AbcButtonsPad();
+        final DigiDisplay digiDisplay = new DigiDisplay();
+        final Timer timer = new Timer(digiDisplay);
+
+        final GameController gameController = new GameController(
+                abcButtonsPad,
+                digiDisplay,
+                timer,
+                new Game(steps, new LedStrip(), new Buzzer())
+        );
+
+        Assert.assertTrue(gameController.isStarted());
+
+        // hit
+        final Step stepHit = steps.get(0);
+        Assert.assertTrue(gameController.onPad(stepHit.getPad()));
+        Assert.assertTrue(abcButtonsPad.isLastPressed(stepHit.getPad()));
+
+        // miss
+        final Step stepMiss = steps.get(2);
+        Assert.assertFalse(gameController.onPad(stepMiss.getPad()));
+        Assert.assertFalse(abcButtonsPad.hasLastPressed());
+
+        // hit
+        final Step stepHitTwo = steps.get(0);
+        Assert.assertTrue(gameController.onPad(stepHitTwo.getPad()));
+        Assert.assertTrue(abcButtonsPad.isLastPressed(stepHitTwo.getPad()));
+
+        // hit
+        final Step stepHitThree = steps.get(1);
+        Assert.assertTrue(gameController.onPad(stepHitThree.getPad()));
+        Assert.assertTrue(abcButtonsPad.isLastPressed(stepHitThree.getPad()));
+
+        // miss
+        final Step stepMissTwo = steps.get(3);
+        Assert.assertFalse(gameController.onPad(stepMissTwo.getPad()));
+        Assert.assertFalse(abcButtonsPad.hasLastPressed());
+
+
+        for (int i = 0; i < steps.size(); i++) {
+            final Pad pad = steps.get(i).getPad();
+            Assert.assertTrue(digiDisplay.isRunning());
+            Assert.assertTrue(gameController.onPad(pad));
+            Assert.assertTrue(abcButtonsPad.isLastPressed(pad));
+            if (i < steps.size() - 1) Assert.assertTrue(abcButtonsPad.isEnabled());
+        }
+
+        Assert.assertTrue(gameController.isWon());
+        Assert.assertFalse(abcButtonsPad.isEnabled());
+        Assert.assertFalse(digiDisplay.isRunning());
+        Assert.assertFalse(gameController.isStarted());
+        Assert.assertEquals(digiDisplay.get(), timer.get());
+    }
+
+    private List<Step> givenARealStepsGenerator() {
+        return new StepsGenerator(new StepsGenerator.RealGenerator()).steps();
+    }
+
+    private List<Step> givenAMockStepsGenerator() {
+        return new StepsGenerator(new StepsGenerator.MockGenerator()).steps();
     }
 }

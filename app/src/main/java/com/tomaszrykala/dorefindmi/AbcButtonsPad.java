@@ -24,4 +24,8 @@ class AbcButtonsPad {
     public void setLastPressed(Pad pad) {
         lastPressed = pad;
     }
+
+    public boolean hasLastPressed() {
+        return lastPressed != null;
+    }
 }
