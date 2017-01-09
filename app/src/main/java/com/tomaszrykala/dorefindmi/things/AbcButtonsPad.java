@@ -1,6 +1,8 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.things;
 
-class AbcButtonsPad {
+import com.tomaszrykala.dorefindmi.model.Pad;
+
+public class AbcButtonsPad {
 
     private boolean isEnabled;
     private Pad lastPressed;

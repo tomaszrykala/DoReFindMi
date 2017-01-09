@@ -1,14 +1,13 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.things;
 
-class DigiDisplay implements Timer.Listener {
+import com.tomaszrykala.dorefindmi.game.Timer;
 
-    private static final String TAG = DigiDisplay.class.getSimpleName();
+public class DigitalDisplay implements Timer.Listener {
 
     private boolean isRunning;
     private int counter;
 
     @Override public void onCounter(int counter) {
-        System.out.println("counter = [" + counter + "]");
         this.counter = counter;
     }
 

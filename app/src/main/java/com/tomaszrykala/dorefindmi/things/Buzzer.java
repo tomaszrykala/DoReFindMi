@@ -1,6 +1,8 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.things;
 
-class Buzzer {
+import com.tomaszrykala.dorefindmi.model.Note;
+
+public class Buzzer {
 
     private Note lastBuzzed;
 

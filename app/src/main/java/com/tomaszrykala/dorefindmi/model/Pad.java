@@ -1,6 +1,6 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.model;
 
-enum Pad {
+public enum Pad {
     A("A"), B("B"), C("C");
     public final String value;
 

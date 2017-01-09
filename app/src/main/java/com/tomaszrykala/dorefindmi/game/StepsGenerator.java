@@ -1,6 +1,11 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.game;
 
 import android.support.annotation.NonNull;
+
+import com.tomaszrykala.dorefindmi.game.Generator;
+import com.tomaszrykala.dorefindmi.game.Step;
+import com.tomaszrykala.dorefindmi.model.Note;
+import com.tomaszrykala.dorefindmi.model.Pad;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,34 +15,34 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import static com.tomaszrykala.dorefindmi.Note.DO_HI;
-import static com.tomaszrykala.dorefindmi.Note.DO_LO;
-import static com.tomaszrykala.dorefindmi.Note.FA;
-import static com.tomaszrykala.dorefindmi.Note.LA;
-import static com.tomaszrykala.dorefindmi.Note.MI;
-import static com.tomaszrykala.dorefindmi.Note.RE;
-import static com.tomaszrykala.dorefindmi.Note.SI;
-import static com.tomaszrykala.dorefindmi.Note.SO;
-import static com.tomaszrykala.dorefindmi.Pad.A;
-import static com.tomaszrykala.dorefindmi.Pad.B;
-import static com.tomaszrykala.dorefindmi.Pad.C;
+import static com.tomaszrykala.dorefindmi.model.Note.DO_HI;
+import static com.tomaszrykala.dorefindmi.model.Note.DO_LO;
+import static com.tomaszrykala.dorefindmi.model.Note.FA;
+import static com.tomaszrykala.dorefindmi.model.Note.LA;
+import static com.tomaszrykala.dorefindmi.model.Note.MI;
+import static com.tomaszrykala.dorefindmi.model.Note.RE;
+import static com.tomaszrykala.dorefindmi.model.Note.SI;
+import static com.tomaszrykala.dorefindmi.model.Note.SO;
+import static com.tomaszrykala.dorefindmi.model.Pad.A;
+import static com.tomaszrykala.dorefindmi.model.Pad.B;
+import static com.tomaszrykala.dorefindmi.model.Pad.C;
 
-class StepsGenerator {
+public class StepsGenerator {
 
     private final List<Note> notes = new ArrayList<>(Arrays.asList(
             new Note[]{DO_LO, RE, MI, FA, SO, LA, SI, DO_HI}));
     private final Pad[] pads = new Pad[]{A, B, C};
     private final Generator generator;
 
-    StepsGenerator(Generator generator) {
+    public StepsGenerator(Generator generator) {
         this.generator = generator;
     }
 
-    List<Step> steps() {
+    public List<Step> steps() {
         return generator.getSteps(notes, pads);
     }
 
-    static class RealGenerator implements Generator {
+    public static class RealGenerator implements Generator {
 
         @NonNull @Override public List<Step> getSteps(List<Note> notes, Pad[] pads) {
             final List<Step> steps = new LinkedList<>();
@@ -56,7 +61,7 @@ class StepsGenerator {
         }
     }
 
-    static class MockGenerator implements Generator {
+    public static class MockGenerator implements Generator {
 
         @NonNull @Override public List<Step> getSteps(List<Note> notes, Pad[] pads) {
             final Step[] steps = {

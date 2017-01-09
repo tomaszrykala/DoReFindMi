@@ -1,9 +1,14 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.game;
+
+import com.tomaszrykala.dorefindmi.things.Buzzer;
+import com.tomaszrykala.dorefindmi.things.LedStrip;
+import com.tomaszrykala.dorefindmi.model.Note;
+import com.tomaszrykala.dorefindmi.model.Pad;
 
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
-class Game implements PadListener {
+public class Game implements PadListener {
 
     private final LinkedBlockingQueue<Step> queue;
     private final List<Step> steps;

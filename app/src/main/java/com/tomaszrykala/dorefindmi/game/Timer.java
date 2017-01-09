@@ -1,10 +1,10 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.game;
 
 import java.util.concurrent.TimeUnit;
 
-class Timer {
+public class Timer {
 
-    Timer(Listener listener) {
+    public Timer(Listener listener) {
         this.listener = listener;
     }
 

@@ -1,6 +1,6 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.model;
 
-enum Led {
+public enum Led {
     ZERO("0"), ONE("1"), TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"), ALL("ALL"), NONE(null);
 
     public final String value;

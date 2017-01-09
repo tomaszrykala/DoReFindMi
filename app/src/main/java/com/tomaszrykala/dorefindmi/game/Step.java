@@ -1,6 +1,10 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.game;
 
-class Step {
+import com.tomaszrykala.dorefindmi.model.Note;
+import com.tomaszrykala.dorefindmi.model.Pad;
+
+public class Step {
+
     private final Pad pad;
     private final Note note;
 

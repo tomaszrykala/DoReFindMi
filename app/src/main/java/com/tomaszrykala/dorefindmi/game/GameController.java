@@ -1,15 +1,19 @@
-package com.tomaszrykala.dorefindmi;
+package com.tomaszrykala.dorefindmi.game;
 
-class GameController implements PadListener {
+import com.tomaszrykala.dorefindmi.things.AbcButtonsPad;
+import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
+import com.tomaszrykala.dorefindmi.model.Pad;
+
+public class GameController implements PadListener {
 
     private final AbcButtonsPad abcButtonsPad;
-    private final DigiDisplay digiDisplay;
+    private final DigitalDisplay digitalDisplay;
     private final Timer timer;
     private final Game game;
 
-    public GameController(AbcButtonsPad abcButtonsPad, DigiDisplay digiDisplay, Timer timer, Game game) {
+    public GameController(AbcButtonsPad abcButtonsPad, DigitalDisplay digitalDisplay, Timer timer, Game game) {
         this.abcButtonsPad = abcButtonsPad;
-        this.digiDisplay = digiDisplay;
+        this.digitalDisplay = digitalDisplay;
         this.timer = timer;
         this.game = game;
         start();
