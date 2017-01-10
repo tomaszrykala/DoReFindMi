@@ -1,5 +1,7 @@
 package com.tomaszrykala.dorefindmi;
 
+import com.tomaszrykala.dorefindmi.game.generator.MockGenerator;
+import com.tomaszrykala.dorefindmi.game.generator.RealGenerator;
 import com.tomaszrykala.dorefindmi.things.AbcButtonsPad;
 import com.tomaszrykala.dorefindmi.things.Buzzer;
 import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
@@ -198,10 +200,10 @@ public class ExampleUnitTest {
     }
 
     private List<Step> givenARealStepsGenerator() {
-        return new StepsGenerator(new StepsGenerator.RealGenerator()).steps();
+        return new StepsGenerator(new RealGenerator()).steps();
     }
 
     private List<Step> givenAMockStepsGenerator() {
-        return new StepsGenerator(new StepsGenerator.MockGenerator()).steps();
+        return new StepsGenerator(new MockGenerator()).steps();
     }
 }
