@@ -1,59 +1,59 @@
 package com.tomaszrykala.dorefindmi.game;
 
-import com.tomaszrykala.dorefindmi.things.AbcButtonLeds;
-import com.tomaszrykala.dorefindmi.things.AbcButtonPads;
+import com.tomaszrykala.dorefindmi.things.AbcLeds;
+import com.tomaszrykala.dorefindmi.things.AbcButtons;
 import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
-import com.tomaszrykala.dorefindmi.model.Pad;
+import com.tomaszrykala.dorefindmi.model.AbcButton;
 
 public class GameController implements PadListener {
 
-    private final AbcButtonPads abcButtonPads;
-    private final AbcButtonLeds abcButtonLeds;
+    private final AbcButtons abcButtons;
+    private final AbcLeds abcLeds;
     private final DigitalDisplay digitalDisplay;
     private final Timer timer;
     private final Game game;
 
-    public GameController(AbcButtonPads abcButtonPads, AbcButtonLeds abcButtonLeds, DigitalDisplay digitalDisplay, Timer timer, Game game) {
-        this.abcButtonPads = abcButtonPads;
-        this.abcButtonLeds = abcButtonLeds;
+    public GameController(AbcButtons abcButtons, AbcLeds abcLeds, DigitalDisplay digitalDisplay, Timer timer, Game game) {
+        this.abcButtons = abcButtons;
+        this.abcLeds = abcLeds;
         this.digitalDisplay = digitalDisplay;
         this.timer = timer;
         this.game = game;
 
-        abcButtonPads.setListener(this);
+        abcButtons.setListener(this);
         start();
     }
 
-    @Override public boolean onPad(Pad pad) {
-        final boolean onPad = game.onPad(pad);
-        abcButtonPads.setLastPressed(pad);
+    @Override public boolean onPad(AbcButton abcButton) {
+        final boolean onPad = game.onPad(abcButton);
+        abcButtons.setLastPressed(abcButton);
         if (!onPad) {
             restart();
         } else {
             if (game.isWon()) {
                 stop();
             } else {
-                abcButtonLeds.lightFor(pad);
+                abcLeds.lightFor(abcButton);
             }
         }
         return onPad; // TODO: ignored
     }
 
     private void restart() {
-        abcButtonPads.setLastPressed(null);
-        abcButtonLeds.reset();
+        abcButtons.setLastPressed(null);
+        abcLeds.reset();
         game.start();
     }
 
     private void start() {
-        abcButtonPads.enable();
+        abcButtons.enable();
         timer.start();
         restart();
     }
 
     private void stop() {
         timer.stop();
-        abcButtonPads.disable();
+        abcButtons.disable();
     }
 
     public boolean isStarted() {

@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.tomaszrykala.dorefindmi.game.Step;
 import com.tomaszrykala.dorefindmi.model.Note;
-import com.tomaszrykala.dorefindmi.model.Pad;
+import com.tomaszrykala.dorefindmi.model.AbcButton;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,12 +14,12 @@ import java.util.Random;
 
 public class RealGenerator implements Generator {
 
-    @NonNull @Override public List<Step> getSteps(List<Note> notes, Pad[] pads) {
+    @NonNull @Override public List<Step> getSteps(List<Note> notes, AbcButton[] abcButtons) {
         final List<Step> steps = new LinkedList<>();
         while (!notes.isEmpty()) {
-            final Pad pad = pads[new Random().nextInt(pads.length)];
+            final AbcButton abcButton = abcButtons[new Random().nextInt(abcButtons.length)];
             final Note note = notes.remove(new Random().nextInt(notes.size()));
-            steps.add(new Step(pad, note));
+            steps.add(new Step(abcButton, note));
         }
 
         Collections.sort(steps, new Comparator<Step>() {

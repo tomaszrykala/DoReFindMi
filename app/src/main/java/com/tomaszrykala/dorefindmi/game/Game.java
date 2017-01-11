@@ -3,7 +3,7 @@ package com.tomaszrykala.dorefindmi.game;
 import com.tomaszrykala.dorefindmi.things.Buzzer;
 import com.tomaszrykala.dorefindmi.things.LedStrip;
 import com.tomaszrykala.dorefindmi.model.Note;
-import com.tomaszrykala.dorefindmi.model.Pad;
+import com.tomaszrykala.dorefindmi.model.AbcButton;
 
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -39,9 +39,9 @@ public class Game implements PadListener {
         return started;
     }
 
-    @Override public boolean onPad(Pad pad) {
+    @Override public boolean onPad(AbcButton abcButton) {
         final Step step = queue.poll();
-        final boolean isGuessed = step.getPad() == pad;
+        final boolean isGuessed = step.getAbcButton() == abcButton;
         if (isGuessed) {
             final Note note = step.getNote();
             ledStrip.light(note.led);

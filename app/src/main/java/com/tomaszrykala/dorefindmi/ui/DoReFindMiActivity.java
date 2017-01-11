@@ -8,8 +8,8 @@ import com.tomaszrykala.dorefindmi.game.GameController;
 import com.tomaszrykala.dorefindmi.game.StepsGenerator;
 import com.tomaszrykala.dorefindmi.game.Timer;
 import com.tomaszrykala.dorefindmi.game.generator.MockGenerator;
-import com.tomaszrykala.dorefindmi.things.AbcButtonLeds;
-import com.tomaszrykala.dorefindmi.things.AbcButtonPads;
+import com.tomaszrykala.dorefindmi.things.AbcLeds;
+import com.tomaszrykala.dorefindmi.things.AbcButtons;
 import com.tomaszrykala.dorefindmi.things.Buzzer;
 import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
 import com.tomaszrykala.dorefindmi.things.LedStrip;
@@ -17,8 +17,8 @@ import com.tomaszrykala.dorefindmi.things.LedStrip;
 public class DoReFindMiActivity extends Activity {
 
     // things - provided
-    private final AbcButtonPads abcButtonPads = new AbcButtonPads(true);
-    private final AbcButtonLeds abcButtonLeds = new AbcButtonLeds(true);
+    private final AbcButtons abcButtons = new AbcButtons(new AbcButtons.RealAbcButtonSupplier());
+    private final AbcLeds abcLeds = new AbcLeds(new AbcLeds.RealAbcLedSupplier());
     private final DigitalDisplay digitalDisplay = new DigitalDisplay();
     private final LedStrip ledStrip = new LedStrip();
     private final Buzzer buzzer = new Buzzer();
@@ -37,8 +37,8 @@ public class DoReFindMiActivity extends Activity {
 
     private void closeHat() {
         try {
-            abcButtonPads.close();
-            abcButtonLeds.close();
+            abcButtons.close();
+            abcLeds.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,8 +46,8 @@ public class DoReFindMiActivity extends Activity {
 
     private void initGameController() {
         new GameController(
-                abcButtonPads,
-                abcButtonLeds, digitalDisplay,
+                abcButtons,
+                abcLeds, digitalDisplay,
                 new Timer(digitalDisplay),
                 new Game(
                         new StepsGenerator(

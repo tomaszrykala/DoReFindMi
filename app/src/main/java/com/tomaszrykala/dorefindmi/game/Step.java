@@ -1,20 +1,20 @@
 package com.tomaszrykala.dorefindmi.game;
 
 import com.tomaszrykala.dorefindmi.model.Note;
-import com.tomaszrykala.dorefindmi.model.Pad;
+import com.tomaszrykala.dorefindmi.model.AbcButton;
 
 public class Step {
 
-    private final Pad pad;
+    private final AbcButton abcButton;
     private final Note note;
 
-    public Step(Pad pad, Note note) {
-        this.pad = pad;
+    public Step(AbcButton abcButton, Note note) {
+        this.abcButton = abcButton;
         this.note = note;
     }
 
-    public Pad getPad() {
-        return pad;
+    public AbcButton getAbcButton() {
+        return abcButton;
     }
 
     public Note getNote() {
