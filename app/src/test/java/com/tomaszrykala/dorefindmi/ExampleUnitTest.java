@@ -14,6 +14,8 @@ import com.tomaszrykala.dorefindmi.game.StepsGenerator;
 import com.tomaszrykala.dorefindmi.game.Timer;
 import com.tomaszrykala.dorefindmi.model.Note;
 import com.tomaszrykala.dorefindmi.model.AbcButton;
+import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.MockAbcButtonSupplier;
+import com.tomaszrykala.dorefindmi.things.suppliers.abcled.MockAbcLedSupplier;
 
 import junit.framework.Assert;
 
@@ -115,11 +117,11 @@ public class ExampleUnitTest {
     @Test
     public void testGameController_whenWon() {
         final List<Step> steps = givenARealStepsGenerator();
-        final AbcButtons abcButtons = new AbcButtons(new AbcButtons.MockAbcButtonSupplier());
+        final AbcButtons abcButtons = new AbcButtons(new MockAbcButtonSupplier());
         final DigitalDisplay digitalDisplay = new DigitalDisplay();
         final Timer timer = new Timer(digitalDisplay);
 
-        final AbcLeds abcLeds = new AbcLeds(new AbcLeds.MockAbcLedSupplier()); // TODO
+        final AbcLeds abcLeds = new AbcLeds(new MockAbcLedSupplier()); // TODO
 
         final GameController gameController = new GameController(
                 abcButtons,
@@ -148,11 +150,11 @@ public class ExampleUnitTest {
     @Test
     public void testGameController_whenHitMissHitHitMissWon() {
         final List<Step> steps = givenAMockStepsGenerator();
-        final AbcButtons abcButtons = new AbcButtons(new AbcButtons.MockAbcButtonSupplier());
+        final AbcButtons abcButtons = new AbcButtons(new MockAbcButtonSupplier());
         final DigitalDisplay digitalDisplay = new DigitalDisplay();
         final Timer timer = new Timer(digitalDisplay);
 
-        final AbcLeds abcLeds = new AbcLeds(new AbcLeds.MockAbcLedSupplier()); // TODO
+        final AbcLeds abcLeds = new AbcLeds(new MockAbcLedSupplier()); // TODO
 
         final GameController gameController = new GameController(
                 abcButtons,

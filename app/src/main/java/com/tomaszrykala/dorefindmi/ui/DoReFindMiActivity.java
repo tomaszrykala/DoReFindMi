@@ -13,12 +13,14 @@ import com.tomaszrykala.dorefindmi.things.AbcButtons;
 import com.tomaszrykala.dorefindmi.things.Buzzer;
 import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
 import com.tomaszrykala.dorefindmi.things.LedStrip;
+import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.RealAbcButtonSupplier;
+import com.tomaszrykala.dorefindmi.things.suppliers.abcled.RealAbcLedSupplier;
 
 public class DoReFindMiActivity extends Activity {
 
     // things - provided
-    private final AbcButtons abcButtons = new AbcButtons(new AbcButtons.RealAbcButtonSupplier());
-    private final AbcLeds abcLeds = new AbcLeds(new AbcLeds.RealAbcLedSupplier());
+    private final AbcButtons abcButtons = new AbcButtons(new RealAbcButtonSupplier());
+    private final AbcLeds abcLeds = new AbcLeds(new RealAbcLedSupplier());
     private final DigitalDisplay digitalDisplay = new DigitalDisplay();
     private final LedStrip ledStrip = new LedStrip();
     private final Buzzer buzzer = new Buzzer();
