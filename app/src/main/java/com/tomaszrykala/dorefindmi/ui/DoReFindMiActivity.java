@@ -15,6 +15,7 @@ import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
 import com.tomaszrykala.dorefindmi.things.LedStrip;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.RealAbcButtonSupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcled.RealAbcLedSupplier;
+import com.tomaszrykala.dorefindmi.things.suppliers.buzzer.RealBuzzerSupplier;
 
 public class DoReFindMiActivity extends Activity {
 
@@ -23,7 +24,7 @@ public class DoReFindMiActivity extends Activity {
     private final AbcLeds abcLeds = new AbcLeds(new RealAbcLedSupplier());
     private final DigitalDisplay digitalDisplay = new DigitalDisplay();
     private final LedStrip ledStrip = new LedStrip();
-    private final Buzzer buzzer = new Buzzer();
+    private final Buzzer buzzer = new Buzzer(new RealBuzzerSupplier());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

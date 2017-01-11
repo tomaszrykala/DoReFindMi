@@ -1,12 +1,8 @@
 package com.tomaszrykala.dorefindmi.things;
 
-import com.google.android.things.contrib.driver.rainbowhat.RainbowHat;
-import com.google.android.things.pio.Gpio;
 import com.tomaszrykala.dorefindmi.model.AbcButton;
 import com.tomaszrykala.dorefindmi.model.AbcLed;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcled.AbcLedSupplier;
-
-import java.io.IOException;
 
 public class AbcLeds implements AbcLed.Listener, AutoCloseable {
 
@@ -53,5 +49,4 @@ public class AbcLeds implements AbcLed.Listener, AutoCloseable {
     public void close() throws Exception {
         supplier.close();
     }
-
 }

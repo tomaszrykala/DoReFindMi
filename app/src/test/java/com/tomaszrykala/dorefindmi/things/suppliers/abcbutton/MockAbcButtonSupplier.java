@@ -10,7 +10,8 @@ public class MockAbcButtonSupplier implements AbcButtonSupplier {
     }
 
     @Override public void onButtonEvent(Button button, boolean pressed) {
-        System.out.println("MockAbcButtonSupplier.onButtonEvent");
+        System.out.print("MockAbcButtonSupplier.onButtonEvent; ");
+        System.out.println("button = [" + button + "], pressed = [" + pressed + "]");
     }
 
     @Override public void close() throws Exception {

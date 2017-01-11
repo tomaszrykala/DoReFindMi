@@ -1,9 +1,9 @@
 package com.tomaszrykala.dorefindmi.game;
 
-import com.tomaszrykala.dorefindmi.things.AbcLeds;
-import com.tomaszrykala.dorefindmi.things.AbcButtons;
-import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
 import com.tomaszrykala.dorefindmi.model.AbcButton;
+import com.tomaszrykala.dorefindmi.things.AbcButtons;
+import com.tomaszrykala.dorefindmi.things.AbcLeds;
+import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
 
 public class GameController implements PadListener {
 
@@ -20,7 +20,7 @@ public class GameController implements PadListener {
         this.timer = timer;
         this.game = game;
 
-        abcButtons.setListener(this);
+        this.abcButtons.setListener(this);
         start();
     }
 

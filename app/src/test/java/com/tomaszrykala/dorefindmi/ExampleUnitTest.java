@@ -1,21 +1,22 @@
 package com.tomaszrykala.dorefindmi;
 
-import com.tomaszrykala.dorefindmi.game.generator.MockGenerator;
-import com.tomaszrykala.dorefindmi.game.generator.RealGenerator;
-import com.tomaszrykala.dorefindmi.things.AbcLeds;
-import com.tomaszrykala.dorefindmi.things.AbcButtons;
-import com.tomaszrykala.dorefindmi.things.Buzzer;
-import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
-import com.tomaszrykala.dorefindmi.things.LedStrip;
 import com.tomaszrykala.dorefindmi.game.Game;
 import com.tomaszrykala.dorefindmi.game.GameController;
 import com.tomaszrykala.dorefindmi.game.Step;
 import com.tomaszrykala.dorefindmi.game.StepsGenerator;
 import com.tomaszrykala.dorefindmi.game.Timer;
-import com.tomaszrykala.dorefindmi.model.Note;
+import com.tomaszrykala.dorefindmi.game.generator.MockGenerator;
+import com.tomaszrykala.dorefindmi.game.generator.RealGenerator;
 import com.tomaszrykala.dorefindmi.model.AbcButton;
+import com.tomaszrykala.dorefindmi.model.Note;
+import com.tomaszrykala.dorefindmi.things.AbcButtons;
+import com.tomaszrykala.dorefindmi.things.AbcLeds;
+import com.tomaszrykala.dorefindmi.things.Buzzer;
+import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
+import com.tomaszrykala.dorefindmi.things.LedStrip;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.MockAbcButtonSupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcled.MockAbcLedSupplier;
+import com.tomaszrykala.dorefindmi.things.suppliers.buzzer.MockBuzzerSupplier;
 
 import junit.framework.Assert;
 
@@ -36,7 +37,7 @@ public class ExampleUnitTest {
 
     // TODO: Mock
     private LedStrip ledStrip = new LedStrip();
-    private Buzzer buzzer = new Buzzer();
+    private Buzzer buzzer = new Buzzer(new MockBuzzerSupplier());
     // private Game game = new Game(StepsGenerator.steps(), new LedStrip(), new Buzzer());
 
     @Test
@@ -127,7 +128,7 @@ public class ExampleUnitTest {
                 abcButtons,
                 abcLeds, digitalDisplay,
                 timer,
-                new Game(steps, new LedStrip(), new Buzzer())
+                new Game(steps, new LedStrip(), new Buzzer(new MockBuzzerSupplier()))
         );
 
         Assert.assertTrue(gameController.isStarted());
@@ -160,7 +161,7 @@ public class ExampleUnitTest {
                 abcButtons,
                 abcLeds, digitalDisplay,
                 timer,
-                new Game(steps, new LedStrip(), new Buzzer())
+                new Game(steps, new LedStrip(), new Buzzer(new MockBuzzerSupplier()))
         );
 
         Assert.assertTrue(gameController.isStarted());
