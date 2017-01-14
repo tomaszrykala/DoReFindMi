@@ -1,7 +1,7 @@
 package com.tomaszrykala.dorefindmi.game;
 
-import com.tomaszrykala.dorefindmi.model.Pad;
+import com.tomaszrykala.dorefindmi.model.AbcButton;
 
-interface PadListener {
-    boolean onPad(Pad pad);
+public interface PadListener {
+    boolean onPad(AbcButton abcButton);
 }
