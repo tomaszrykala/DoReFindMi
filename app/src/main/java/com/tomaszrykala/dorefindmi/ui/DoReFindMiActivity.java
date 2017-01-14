@@ -11,11 +11,12 @@ import com.tomaszrykala.dorefindmi.game.generator.MockGenerator;
 import com.tomaszrykala.dorefindmi.things.AbcButtons;
 import com.tomaszrykala.dorefindmi.things.AbcLeds;
 import com.tomaszrykala.dorefindmi.things.Buzzer;
-import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
+import com.tomaszrykala.dorefindmi.things.controller.digidisplay.DigiDisplayController;
 import com.tomaszrykala.dorefindmi.things.LedStrip;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.RealAbcButtonSupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcled.RealAbcLedSupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.buzzer.RealBuzzerSupplier;
+import com.tomaszrykala.dorefindmi.things.suppliers.digidisplay.RealDigiDisplaySupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.ledstrip.RealLedStripSupplier;
 
 public class DoReFindMiActivity extends Activity {
@@ -23,7 +24,8 @@ public class DoReFindMiActivity extends Activity {
     // things - provided
     private final AbcButtons abcButtons = new AbcButtons(new RealAbcButtonSupplier());
     private final AbcLeds abcLeds = new AbcLeds(new RealAbcLedSupplier());
-    private final DigitalDisplay digitalDisplay = new DigitalDisplay();
+    private final DigiDisplayController digiDisplayController =
+            new DigiDisplayController(new RealDigiDisplaySupplier());
     private final LedStrip ledStrip = new LedStrip(new RealLedStripSupplier());
     private final Buzzer buzzer = new Buzzer(new RealBuzzerSupplier());
 
@@ -51,8 +53,8 @@ public class DoReFindMiActivity extends Activity {
     private void initGameController() {
         new GameController(
                 abcButtons,
-                abcLeds, digitalDisplay,
-                new Timer(digitalDisplay),
+                abcLeds, digiDisplayController,
+                new Timer(digiDisplayController),
                 new Game(
                         new StepsGenerator(
                                 // new RealGenerator() // TODO

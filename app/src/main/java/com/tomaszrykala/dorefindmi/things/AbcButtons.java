@@ -2,11 +2,12 @@ package com.tomaszrykala.dorefindmi.things;
 
 import com.tomaszrykala.dorefindmi.game.PadListener;
 import com.tomaszrykala.dorefindmi.model.AbcButton;
+import com.tomaszrykala.dorefindmi.things.controller.BaseController;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.AbcButtonSupplier;
 
-public class AbcButtons implements AbcButton.Listener, AutoCloseable {
+public class AbcButtons implements BaseController, AbcButton.Listener {
 
-    private AbcButtonSupplier supplier;
+    private final AbcButtonSupplier supplier;
     private PadListener listener;
 
     private boolean isEnabled;
@@ -63,7 +64,6 @@ public class AbcButtons implements AbcButton.Listener, AutoCloseable {
 
     @Override public void close() throws Exception {
         supplier.close();
-        supplier = null;
     }
 
 }

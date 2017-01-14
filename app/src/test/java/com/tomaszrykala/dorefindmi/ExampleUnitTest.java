@@ -14,11 +14,12 @@ import com.tomaszrykala.dorefindmi.model.Note;
 import com.tomaszrykala.dorefindmi.things.AbcButtons;
 import com.tomaszrykala.dorefindmi.things.AbcLeds;
 import com.tomaszrykala.dorefindmi.things.Buzzer;
-import com.tomaszrykala.dorefindmi.things.DigitalDisplay;
 import com.tomaszrykala.dorefindmi.things.LedStrip;
+import com.tomaszrykala.dorefindmi.things.controller.digidisplay.DigiDisplayController;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.MockAbcButtonSupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcled.MockAbcLedSupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.buzzer.MockBuzzerSupplier;
+import com.tomaszrykala.dorefindmi.things.suppliers.digidisplay.MockDigiDisplaySupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.ledstrip.MockLedStripSupplier;
 
 import junit.framework.Assert;
@@ -122,14 +123,14 @@ public class ExampleUnitTest {
     public void testGameController_whenWon() {
         final List<Step> steps = givenARealStepsGenerator();
         final AbcButtons abcButtons = new AbcButtons(new MockAbcButtonSupplier());
-        final DigitalDisplay digitalDisplay = new DigitalDisplay();
-        final Timer timer = new Timer(digitalDisplay);
+        final DigiDisplayController digiDisplayController = new DigiDisplayController(new MockDigiDisplaySupplier());
+        final Timer timer = new Timer(digiDisplayController);
 
         final AbcLeds abcLeds = new AbcLeds(new MockAbcLedSupplier()); // TODO
 
         final GameController gameController = new GameController(
                 abcButtons,
-                abcLeds, digitalDisplay,
+                abcLeds, digiDisplayController,
                 timer,
                 new Game(steps, new LedStrip(new MockLedStripSupplier()), new Buzzer(new MockBuzzerSupplier()))
         );
@@ -138,7 +139,7 @@ public class ExampleUnitTest {
 
         for (int i = 0; i < steps.size(); i++) {
             final AbcButton abcButton = steps.get(i).getAbcButton();
-            Assert.assertTrue(digitalDisplay.isRunning());
+            Assert.assertTrue(digiDisplayController.isRunning());
             Assert.assertTrue(gameController.onPad(abcButton));
             Assert.assertTrue(abcButtons.isLastPressed(abcButton));
             if (i < steps.size() - 1) Assert.assertTrue(abcButtons.isEnabled());
@@ -146,23 +147,23 @@ public class ExampleUnitTest {
 
         Assert.assertTrue(gameController.isWon());
         Assert.assertFalse(abcButtons.isEnabled());
-        Assert.assertFalse(digitalDisplay.isRunning());
+        Assert.assertFalse(digiDisplayController.isRunning());
         Assert.assertFalse(gameController.isStarted());
-        Assert.assertEquals(digitalDisplay.get(), timer.get());
+        Assert.assertEquals(digiDisplayController.get(), timer.get());
     }
 
     @Test
     public void testGameController_whenHitMissHitHitMissWon() {
         final List<Step> steps = givenAMockStepsGenerator();
         final AbcButtons abcButtons = new AbcButtons(new MockAbcButtonSupplier());
-        final DigitalDisplay digitalDisplay = new DigitalDisplay();
-        final Timer timer = new Timer(digitalDisplay);
+        final DigiDisplayController digiDisplayController = new DigiDisplayController(new MockDigiDisplaySupplier());
+        final Timer timer = new Timer(digiDisplayController);
 
         final AbcLeds abcLeds = new AbcLeds(new MockAbcLedSupplier()); // TODO
 
         final GameController gameController = new GameController(
                 abcButtons,
-                abcLeds, digitalDisplay,
+                abcLeds, digiDisplayController,
                 timer,
                 new Game(steps, new LedStrip(new MockLedStripSupplier()), new Buzzer(new MockBuzzerSupplier()))
         );
@@ -197,7 +198,7 @@ public class ExampleUnitTest {
 
         for (int i = 0; i < steps.size(); i++) {
             final AbcButton abcButton = steps.get(i).getAbcButton();
-            Assert.assertTrue(digitalDisplay.isRunning());
+            Assert.assertTrue(digiDisplayController.isRunning());
             Assert.assertTrue(gameController.onPad(abcButton));
             Assert.assertTrue(abcButtons.isLastPressed(abcButton));
             if (i < steps.size() - 1) Assert.assertTrue(abcButtons.isEnabled());
@@ -205,9 +206,9 @@ public class ExampleUnitTest {
 
         Assert.assertTrue(gameController.isWon());
         Assert.assertFalse(abcButtons.isEnabled());
-        Assert.assertFalse(digitalDisplay.isRunning());
+        Assert.assertFalse(digiDisplayController.isRunning());
         Assert.assertFalse(gameController.isStarted());
-        Assert.assertEquals(digitalDisplay.get(), timer.get());
+        Assert.assertEquals(digiDisplayController.get(), timer.get());
     }
 
     private List<Step> givenARealStepsGenerator() {

@@ -1,9 +1,10 @@
 package com.tomaszrykala.dorefindmi.things;
 
 import com.tomaszrykala.dorefindmi.model.Note;
+import com.tomaszrykala.dorefindmi.things.controller.BaseController;
 import com.tomaszrykala.dorefindmi.things.suppliers.buzzer.BuzzerSupplier;
 
-public class Buzzer implements AutoCloseable {
+public class Buzzer implements BaseController {
 
     private Note lastBuzzed;
     private final BuzzerSupplier supplier;

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+// TODO should go to test later
 public class MockGenerator implements Generator {
 
     @NonNull @Override public List<Step> getSteps(List<Note> notes, AbcButton[] abcButtons) {

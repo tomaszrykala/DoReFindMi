@@ -1,0 +1,16 @@
+package com.tomaszrykala.dorefindmi.things.suppliers.digidisplay;
+
+import com.tomaszrykala.dorefindmi.things.suppliers.BaseSupplier;
+
+public interface DigiDisplaySupplier extends BaseSupplier {
+
+//    void display(char c, int index, boolean dot);
+
+//    void display(double n);
+
+    void display(int n);
+
+    void display(String s);
+
+//    void clear();
+}

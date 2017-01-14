@@ -1,9 +1,10 @@
 package com.tomaszrykala.dorefindmi.things;
 
 import com.tomaszrykala.dorefindmi.model.Led;
+import com.tomaszrykala.dorefindmi.things.controller.BaseController;
 import com.tomaszrykala.dorefindmi.things.suppliers.ledstrip.LedStripSupplier;
 
-public class LedStrip implements AutoCloseable {
+public class LedStrip implements BaseController {
 
     private final LedStripSupplier ledStripSupplier;
 

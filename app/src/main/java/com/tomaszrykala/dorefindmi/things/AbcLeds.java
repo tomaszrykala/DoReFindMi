@@ -2,9 +2,10 @@ package com.tomaszrykala.dorefindmi.things;
 
 import com.tomaszrykala.dorefindmi.model.AbcButton;
 import com.tomaszrykala.dorefindmi.model.AbcLed;
+import com.tomaszrykala.dorefindmi.things.controller.BaseController;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcled.AbcLedSupplier;
 
-public class AbcLeds implements AbcLed.Listener, AutoCloseable {
+public class AbcLeds implements BaseController, AbcLed.Listener {
 
     private final AbcLedSupplier supplier;
 
