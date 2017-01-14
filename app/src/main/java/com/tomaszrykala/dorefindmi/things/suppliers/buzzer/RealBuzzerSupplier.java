@@ -13,7 +13,8 @@ public class RealBuzzerSupplier implements BuzzerSupplier {
         init();
     }
 
-    private void init() {
+    @Override
+    public void init() {
         try {
             speaker = RainbowHat.openPiezo();
         } catch (IOException e) {

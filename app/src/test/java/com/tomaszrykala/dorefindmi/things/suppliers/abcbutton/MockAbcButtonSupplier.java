@@ -5,6 +5,10 @@ import com.tomaszrykala.dorefindmi.model.AbcButton;
 
 public class MockAbcButtonSupplier implements AbcButtonSupplier {
 
+    @Override public void init() {
+        System.out.println("MockAbcButtonSupplier.init");
+    }
+
     @Override public void setListener(AbcButton.Listener listener) {
         System.out.println("MockAbcButtonSupplier.setListener");
     }

@@ -7,14 +7,14 @@ import com.tomaszrykala.dorefindmi.things.suppliers.abcled.AbcLedSupplier;
 public class AbcLeds implements AbcLed.Listener, AutoCloseable {
 
     private final AbcLedSupplier supplier;
-    private AbcLed lastLit;
-
-    public boolean isLitAt(AbcLed abcLed) {
-        return lastLit == abcLed;
-    }
 
     public AbcLeds(AbcLedSupplier abcLedSupplier) {
         supplier = abcLedSupplier;
+    }
+
+    // TODO not needed?
+    public boolean isLitAt(AbcLed abcLed) {
+        return supplier.isLitAt(abcLed);
     }
 
     @Override

@@ -18,7 +18,8 @@ public class RealAbcButtonSupplier implements AbcButtonSupplier {
         init();
     }
 
-    private void init() {
+    @Override
+    public void init() {
         try {
             buttonA = RainbowHat.openButton(RainbowHat.BUTTON_A);
             buttonB = RainbowHat.openButton(RainbowHat.BUTTON_B);

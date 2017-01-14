@@ -1,5 +1,7 @@
 package com.tomaszrykala.dorefindmi;
 
+import android.graphics.Color;
+
 import com.tomaszrykala.dorefindmi.game.Game;
 import com.tomaszrykala.dorefindmi.game.GameController;
 import com.tomaszrykala.dorefindmi.game.Step;
@@ -17,6 +19,7 @@ import com.tomaszrykala.dorefindmi.things.LedStrip;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.MockAbcButtonSupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcled.MockAbcLedSupplier;
 import com.tomaszrykala.dorefindmi.things.suppliers.buzzer.MockBuzzerSupplier;
+import com.tomaszrykala.dorefindmi.things.suppliers.ledstrip.MockLedStripSupplier;
 
 import junit.framework.Assert;
 
@@ -36,38 +39,38 @@ import static com.tomaszrykala.dorefindmi.model.Note.SO;
 public class ExampleUnitTest {
 
     // TODO: Mock
-    private LedStrip ledStrip = new LedStrip();
+    private LedStrip ledStrip = new LedStrip(new MockLedStripSupplier());
     private Buzzer buzzer = new Buzzer(new MockBuzzerSupplier());
     // private Game game = new Game(StepsGenerator.steps(), new LedStrip(), new Buzzer());
 
     @Test
     public void testNotes() throws Exception {
         Assert.assertEquals("DO_LO", DO_LO.pitch);
-        Assert.assertEquals("0", DO_LO.led.toString());
+        Assert.assertEquals(Color.YELLOW, DO_LO.led.color);
 
         Assert.assertEquals("RE", RE.pitch);
-        Assert.assertEquals("1", RE.led.toString());
+        Assert.assertEquals(Color.GREEN, RE.led.color);
 
         Assert.assertEquals("MI", MI.pitch);
-        Assert.assertEquals("2", MI.led.toString());
+        Assert.assertEquals(Color.CYAN, MI.led.color);
 
         Assert.assertEquals("FA", FA.pitch);
-        Assert.assertEquals("3", FA.led.toString());
+        Assert.assertEquals(Color.BLUE, FA.led.color);
 
         Assert.assertEquals("SO", SO.pitch);
-        Assert.assertEquals("4", SO.led.toString());
+        Assert.assertEquals(Color.LTGRAY, SO.led.color);
 
         Assert.assertEquals("LA", Note.LA.pitch);
-        Assert.assertEquals("5", Note.LA.led.toString());
+        Assert.assertEquals(Color.MAGENTA, Note.LA.led.color);
 
         Assert.assertEquals("SI", Note.SI.pitch);
-        Assert.assertEquals("6", Note.SI.led.toString());
+        Assert.assertEquals(Color.RED, Note.SI.led.color);
 
         Assert.assertEquals("DO_HI", Note.DO_HI.pitch);
-        Assert.assertEquals("ALL", Note.DO_HI.led.toString());
+        Assert.assertEquals(Color.WHITE, Note.DO_HI.led.color);
 
         Assert.assertEquals("MISS", Note.MISS.pitch);
-        Assert.assertNull(Note.MISS.led.toString());
+        Assert.assertEquals(Color.BLACK, Note.MISS.led.color);
     }
 
     @Test
@@ -128,7 +131,7 @@ public class ExampleUnitTest {
                 abcButtons,
                 abcLeds, digitalDisplay,
                 timer,
-                new Game(steps, new LedStrip(), new Buzzer(new MockBuzzerSupplier()))
+                new Game(steps, new LedStrip(new MockLedStripSupplier()), new Buzzer(new MockBuzzerSupplier()))
         );
 
         Assert.assertTrue(gameController.isStarted());
@@ -161,7 +164,7 @@ public class ExampleUnitTest {
                 abcButtons,
                 abcLeds, digitalDisplay,
                 timer,
-                new Game(steps, new LedStrip(), new Buzzer(new MockBuzzerSupplier()))
+                new Game(steps, new LedStrip(new MockLedStripSupplier()), new Buzzer(new MockBuzzerSupplier()))
         );
 
         Assert.assertTrue(gameController.isStarted());

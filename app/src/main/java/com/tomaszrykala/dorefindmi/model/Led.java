@@ -1,15 +1,17 @@
 package com.tomaszrykala.dorefindmi.model;
 
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
+
 public enum Led {
-    ZERO("0"), ONE("1"), TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"), ALL("ALL"), NONE(null);
+    ZERO(0, Color.YELLOW), ONE(1, Color.GREEN), TWO(2, Color.CYAN), THREE(3, Color.BLUE), FOUR(4, Color.LTGRAY),
+    FIVE(5, Color.MAGENTA), SIX(6, Color.RED), ALL(7, Color.WHITE), NONE(-1, Color.BLACK);
 
-    public final String value;
+    public final int index;
+    @ColorInt public final int color;
 
-    Led(String value) {
-        this.value = value;
-    }
-
-    @Override public String toString() {
-        return value;
+    Led(int index, @ColorInt int color) {
+        this.index = index;
+        this.color = color;
     }
 }
