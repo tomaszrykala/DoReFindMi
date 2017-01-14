@@ -30,10 +30,9 @@ public class GameController implements PadListener {
         if (!onPad) {
             restart();
         } else {
+            abcLeds.lightFor(abcButton);
             if (game.isWon()) {
                 stop();
-            } else {
-                abcLeds.lightFor(abcButton);
             }
         }
         return onPad; // TODO: ignored

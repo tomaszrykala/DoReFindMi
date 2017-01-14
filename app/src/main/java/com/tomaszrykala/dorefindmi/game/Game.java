@@ -6,11 +6,12 @@ import com.tomaszrykala.dorefindmi.things.Buzzer;
 import com.tomaszrykala.dorefindmi.things.LedStrip;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Game implements PadListener {
 
-    private final LinkedBlockingQueue<Step> queue;
+    private final Queue<Step> queue;
     private final List<Step> steps;
 
     private final LedStrip ledStrip;
@@ -29,11 +30,12 @@ public class Game implements PadListener {
         start();
     }
 
-    public synchronized void start() {
+    synchronized void start() {
         queue.clear();
         queue.addAll(steps);
         ledStrip.reset();
         started = true;
+        won = false;
     }
 
     public boolean isStarted() {

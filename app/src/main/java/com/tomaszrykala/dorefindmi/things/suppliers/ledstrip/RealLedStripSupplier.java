@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class RealLedStripSupplier implements LedStripSupplier {
 
-    private static final int MAX_BRIGHTNESS = 15; // max = 31
+    private static final int MAX_BRIGHTNESS = 1; // max = 31
     private static final int NO_OF_LEDS = 7;
 
     private final Map<Led, Boolean> ledColorHashMap = new HashMap<>(NO_OF_LEDS);
