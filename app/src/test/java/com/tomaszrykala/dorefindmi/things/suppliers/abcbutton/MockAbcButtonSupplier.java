@@ -1,7 +1,6 @@
 package com.tomaszrykala.dorefindmi.things.suppliers.abcbutton;
 
 import com.google.android.things.contrib.driver.button.Button;
-import com.tomaszrykala.dorefindmi.model.AbcButton;
 
 public class MockAbcButtonSupplier implements AbcButtonSupplier {
 
@@ -9,7 +8,7 @@ public class MockAbcButtonSupplier implements AbcButtonSupplier {
         System.out.println("MockAbcButtonSupplier.init");
     }
 
-    @Override public void setListener(AbcButton.Listener listener) {
+    @Override public void setListener(Listener listener) {
         System.out.println("MockAbcButtonSupplier.setListener");
     }
 

@@ -12,7 +12,7 @@ public class RealAbcButtonSupplier implements AbcButtonSupplier {
     private Button buttonB;
     private Button buttonC;
 
-    private AbcButton.Listener listener;
+    private Listener listener;
 
     public RealAbcButtonSupplier() {
         init();
@@ -35,7 +35,7 @@ public class RealAbcButtonSupplier implements AbcButtonSupplier {
     }
 
     @Override
-    public void setListener(AbcButton.Listener listener) {
+    public void setListener(Listener listener) {
         this.listener = listener;
     }
 

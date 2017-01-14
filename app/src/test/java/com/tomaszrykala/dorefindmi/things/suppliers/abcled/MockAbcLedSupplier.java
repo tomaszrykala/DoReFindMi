@@ -19,6 +19,6 @@ public class MockAbcLedSupplier implements AbcLedSupplier {
 
     @Override public boolean isLitAt(AbcLed abcLed) {
         System.out.println("MockAbcLedSupplier.isLitAt");
-        return false;
+        return true; // TODO
     }
 }

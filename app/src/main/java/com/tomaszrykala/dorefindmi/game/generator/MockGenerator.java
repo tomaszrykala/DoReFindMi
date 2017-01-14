@@ -3,17 +3,17 @@ package com.tomaszrykala.dorefindmi.game.generator;
 import android.support.annotation.NonNull;
 
 import com.tomaszrykala.dorefindmi.game.Step;
-import com.tomaszrykala.dorefindmi.model.Note;
 import com.tomaszrykala.dorefindmi.model.AbcButton;
+import com.tomaszrykala.dorefindmi.model.Note;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 // TODO should go to test later
-public class MockGenerator implements Generator {
+public class MockGenerator extends BaseGenerator {
 
-    @NonNull @Override public List<Step> getSteps(List<Note> notes, AbcButton[] abcButtons) {
+    @NonNull @Override public List<Step> getSteps() {
         final Step[] steps = {
                 new Step(AbcButton.A, Note.DO_LO),
                 new Step(AbcButton.B, Note.RE),
@@ -24,7 +24,6 @@ public class MockGenerator implements Generator {
                 new Step(AbcButton.A, Note.SI),
                 new Step(AbcButton.B, Note.DO_HI),
         };
-        final List<Step> stepList = Arrays.asList(steps);
-        return new LinkedList<>(stepList);
+        return new LinkedList<>(Arrays.asList(steps));
     }
 }

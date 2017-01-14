@@ -5,27 +5,29 @@ import com.tomaszrykala.dorefindmi.things.AbcButtons;
 import com.tomaszrykala.dorefindmi.things.AbcLeds;
 import com.tomaszrykala.dorefindmi.things.controller.digidisplay.DigiDisplayController;
 
-public class GameController implements PadListener {
+public class GameController implements AbcButton.Listener {
 
     private final AbcButtons abcButtons;
     private final AbcLeds abcLeds;
-    private final DigiDisplayController digiDisplayController;
+    private final DigiDisplayController digiDisplay;
     private final Timer timer;
     private final Game game;
 
-    public GameController(AbcButtons abcButtons, AbcLeds abcLeds,
-                          DigiDisplayController digiDisplayController, Timer timer, Game game) {
+    public GameController(AbcButtons abcButtons, AbcLeds abcLeds, DigiDisplayController digiDisplayController,
+                          Timer timer, Game game) {
         this.abcButtons = abcButtons;
+        this.abcButtons.setListener(this);
+
         this.abcLeds = abcLeds;
-        this.digiDisplayController = digiDisplayController;
+        digiDisplay = digiDisplayController;
+
         this.timer = timer;
         this.game = game;
 
-        this.abcButtons.setListener(this);
         start();
     }
 
-    @Override public boolean onPad(AbcButton abcButton) {
+    @Override public void onAbcButton(AbcButton abcButton) {
         final boolean onPad = game.onPad(abcButton);
         abcButtons.setLastPressed(abcButton);
         if (!onPad) {
@@ -36,7 +38,6 @@ public class GameController implements PadListener {
                 stop();
             }
         }
-        return onPad; // TODO: ignored
     }
 
     private void restart() {
@@ -48,10 +49,10 @@ public class GameController implements PadListener {
     }
 
     private void start() {
-        digiDisplayController.displayBlocking("3...", 200);
-        digiDisplayController.displayBlocking("2...", 200);
-        digiDisplayController.displayBlocking("1...", 200);
-        digiDisplayController.displayBlocking("GO !", 500);
+        digiDisplay.displayBlocking("3...", 200);
+        digiDisplay.displayBlocking("2...", 200);
+        digiDisplay.displayBlocking("1...", 200);
+        digiDisplay.displayBlocking("GO !", 500);
         restart();
     }
 
@@ -60,9 +61,9 @@ public class GameController implements PadListener {
         abcButtons.disable();
 
         // TODO: ??
-        digiDisplayController.display("HAT!");
-//        digiDisplayController.display("WON");
-//        digiDisplayController.display(String.valueOf(timer.get()));
+        digiDisplay.display("HAT!");
+//        digiDisplay.display("WON");
+//        digiDisplay.display(String.valueOf(timer.get()));
     }
 
     public boolean isStarted() {

@@ -1,19 +1,18 @@
 package com.tomaszrykala.dorefindmi.things;
 
-import com.tomaszrykala.dorefindmi.game.PadListener;
 import com.tomaszrykala.dorefindmi.model.AbcButton;
 import com.tomaszrykala.dorefindmi.things.controller.BaseController;
 import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.AbcButtonSupplier;
 
-public class AbcButtons implements BaseController, AbcButton.Listener {
+public class AbcButtons implements BaseController, AbcButtonSupplier.Listener {
 
     private final AbcButtonSupplier supplier;
-    private PadListener listener;
+    private AbcButton.Listener listener;
 
     private boolean isEnabled;
     private AbcButton lastPressed;
 
-    public void setListener(PadListener listener) {
+    public void setListener(AbcButton.Listener listener) {
         this.listener = listener;
     }
 
@@ -50,13 +49,13 @@ public class AbcButtons implements BaseController, AbcButton.Listener {
         if (pressed) {
             switch (abcButton) {
                 case A:
-                    listener.onPad(AbcButton.A);
+                    listener.onAbcButton(AbcButton.A);
                     break;
                 case B:
-                    listener.onPad(AbcButton.B);
+                    listener.onAbcButton(AbcButton.B);
                     break;
                 case C:
-                    listener.onPad(AbcButton.C);
+                    listener.onAbcButton(AbcButton.C);
                     break;
             }
         }

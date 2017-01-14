@@ -5,5 +5,9 @@ import com.tomaszrykala.dorefindmi.model.AbcButton;
 import com.tomaszrykala.dorefindmi.things.suppliers.BaseSupplier;
 
 public interface AbcButtonSupplier extends BaseSupplier, Button.OnButtonEventListener {
-    void setListener(AbcButton.Listener listener);
+    void setListener(Listener listener);
+
+    interface Listener {
+        void onButtonEvent(AbcButton abcButton, boolean pressed);
+    }
 }

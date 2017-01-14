@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Game implements PadListener {
+public class Game {
 
     private final Queue<Step> queue;
     private final List<Step> steps;
@@ -20,17 +20,14 @@ public class Game implements PadListener {
     private boolean started;
     private boolean won;
 
-
     public Game(List<Step> steps, LedStrip ledStrip, Buzzer buzzer) {
         queue = new LinkedBlockingQueue<>(steps.size());
         this.ledStrip = ledStrip;
         this.buzzer = buzzer;
         this.steps = steps;
-        started = true;
-        start();
     }
 
-    synchronized void start() {
+    public void start() {
         queue.clear();
         queue.addAll(steps);
         ledStrip.reset();
@@ -42,7 +39,7 @@ public class Game implements PadListener {
         return started;
     }
 
-    @Override public boolean onPad(AbcButton abcButton) {
+    public boolean onPad(AbcButton abcButton) {
         final Step step = queue.poll();
         if (step != null && step.getAbcButton() == abcButton) {
             final Note note = step.getNote();
