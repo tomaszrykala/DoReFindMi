@@ -1,5 +1,7 @@
 package com.tomaszrykala.dorefindmi.things.suppliers.buzzer;
 
-public interface BuzzerSupplier extends AutoCloseable {
+import com.tomaszrykala.dorefindmi.things.suppliers.BaseSupplier;
+
+public interface BuzzerSupplier extends BaseSupplier {
     void play(double pitch);
 }

@@ -1,19 +1,29 @@
 package com.tomaszrykala.dorefindmi.things;
 
 import com.tomaszrykala.dorefindmi.model.Led;
+import com.tomaszrykala.dorefindmi.things.suppliers.ledstrip.LedStripSupplier;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+public class LedStrip implements AutoCloseable {
 
-public class LedStrip {
+    private final LedStripSupplier ledStripSupplier;
 
-    private final Set<Led> leds = new LinkedHashSet<>();
+    public LedStrip(LedStripSupplier ledStripSupplier) {
+        this.ledStripSupplier = ledStripSupplier;
+    }
 
     public boolean isLitAt(Led led) {
-        return leds.contains(led);
+        return ledStripSupplier.isLitAt(led);
     }
 
     public void light(Led led) {
-        leds.add(led);
+        ledStripSupplier.light(led);
+    }
+
+    public void reset() {
+        ledStripSupplier.reset();
+    }
+
+    @Override public void close() throws Exception {
+        ledStripSupplier.close();
     }
 }
