@@ -2,7 +2,7 @@ package com.tomaszrykala.dorefindmi.things.controller.digidisplay;
 
 import com.tomaszrykala.dorefindmi.game.Timer;
 import com.tomaszrykala.dorefindmi.things.controller.BaseController;
-import com.tomaszrykala.dorefindmi.things.suppliers.digidisplay.DigiDisplaySupplier;
+import com.tomaszrykala.dorefindmi.things.supplier.digidisplay.DigiDisplaySupplier;
 
 public class DigiDisplayController implements BaseController, Timer.Listener {
 

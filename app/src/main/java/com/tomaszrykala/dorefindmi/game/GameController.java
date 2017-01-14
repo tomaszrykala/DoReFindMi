@@ -1,24 +1,26 @@
 package com.tomaszrykala.dorefindmi.game;
 
 import com.tomaszrykala.dorefindmi.model.AbcButton;
-import com.tomaszrykala.dorefindmi.things.AbcButtons;
-import com.tomaszrykala.dorefindmi.things.AbcLeds;
+import com.tomaszrykala.dorefindmi.things.controller.abcbuttons.AbcButtonsController;
+import com.tomaszrykala.dorefindmi.things.controller.abcleds.AbcLedsController;
 import com.tomaszrykala.dorefindmi.things.controller.digidisplay.DigiDisplayController;
 
 public class GameController implements AbcButton.Listener {
 
-    private final AbcButtons abcButtons;
-    private final AbcLeds abcLeds;
+    private final AbcButtonsController abcButtons;
+    private final AbcLedsController abcLeds;
     private final DigiDisplayController digiDisplay;
     private final Timer timer;
     private final Game game;
 
-    public GameController(AbcButtons abcButtons, AbcLeds abcLeds, DigiDisplayController digiDisplayController,
+    public GameController(AbcButtonsController abcButtonsController,
+                          AbcLedsController abcLedsController,
+                          DigiDisplayController digiDisplayController,
                           Timer timer, Game game) {
-        this.abcButtons = abcButtons;
-        this.abcButtons.setListener(this);
 
-        this.abcLeds = abcLeds;
+        abcButtons = abcButtonsController;
+        abcButtons.setListener(this);
+        abcLeds = abcLedsController;
         digiDisplay = digiDisplayController;
 
         this.timer = timer;
@@ -61,8 +63,7 @@ public class GameController implements AbcButton.Listener {
         abcButtons.disable();
 
         // TODO: ??
-        digiDisplay.display("HAT!");
-//        digiDisplay.display("WON");
+        digiDisplay.display("WON");
 //        digiDisplay.display(String.valueOf(timer.get()));
     }
 

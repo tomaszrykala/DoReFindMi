@@ -7,26 +7,26 @@ import com.tomaszrykala.dorefindmi.game.Game;
 import com.tomaszrykala.dorefindmi.game.GameController;
 import com.tomaszrykala.dorefindmi.game.Timer;
 import com.tomaszrykala.dorefindmi.game.generator.MockGenerator;
-import com.tomaszrykala.dorefindmi.things.AbcButtons;
-import com.tomaszrykala.dorefindmi.things.AbcLeds;
-import com.tomaszrykala.dorefindmi.things.Buzzer;
-import com.tomaszrykala.dorefindmi.things.LedStrip;
+import com.tomaszrykala.dorefindmi.things.controller.abcbuttons.AbcButtonsController;
+import com.tomaszrykala.dorefindmi.things.controller.abcleds.AbcLedsController;
+import com.tomaszrykala.dorefindmi.things.controller.buzzer.BuzzerController;
+import com.tomaszrykala.dorefindmi.things.controller.ledstrip.LedStripController;
 import com.tomaszrykala.dorefindmi.things.controller.digidisplay.DigiDisplayController;
-import com.tomaszrykala.dorefindmi.things.suppliers.abcbutton.RealAbcButtonSupplier;
-import com.tomaszrykala.dorefindmi.things.suppliers.abcled.RealAbcLedSupplier;
-import com.tomaszrykala.dorefindmi.things.suppliers.buzzer.RealBuzzerSupplier;
-import com.tomaszrykala.dorefindmi.things.suppliers.digidisplay.RealDigiDisplaySupplier;
-import com.tomaszrykala.dorefindmi.things.suppliers.ledstrip.RealLedStripSupplier;
+import com.tomaszrykala.dorefindmi.things.supplier.abcbuttons.RealAbcButtonsSupplier;
+import com.tomaszrykala.dorefindmi.things.supplier.abcleds.RealAbcLedsSupplier;
+import com.tomaszrykala.dorefindmi.things.supplier.buzzer.RealBuzzerSupplier;
+import com.tomaszrykala.dorefindmi.things.supplier.digidisplay.RealDigiDisplaySupplier;
+import com.tomaszrykala.dorefindmi.things.supplier.ledstrip.RealLedStripSupplier;
 
 public class DoReFindMiActivity extends Activity {
 
     // things - provided
-    private final AbcButtons abcButtons = new AbcButtons(new RealAbcButtonSupplier());
-    private final AbcLeds abcLeds = new AbcLeds(new RealAbcLedSupplier());
+    private final AbcButtonsController abcButtonsController = new AbcButtonsController(new RealAbcButtonsSupplier());
+    private final AbcLedsController abcLedsController = new AbcLedsController(new RealAbcLedsSupplier());
     private final DigiDisplayController digiDisplayController =
             new DigiDisplayController(new RealDigiDisplaySupplier());
-    private final LedStrip ledStrip = new LedStrip(new RealLedStripSupplier());
-    private final Buzzer buzzer = new Buzzer(new RealBuzzerSupplier());
+    private final LedStripController ledStripController = new LedStripController(new RealLedStripSupplier());
+    private final BuzzerController buzzerController = new BuzzerController(new RealBuzzerSupplier());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,8 @@ public class DoReFindMiActivity extends Activity {
 
     private void closeHat() {
         try {
-            abcButtons.close();
-            abcLeds.close();
+            abcButtonsController.close();
+            abcLedsController.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,12 +51,12 @@ public class DoReFindMiActivity extends Activity {
 
     private void initGameController() {
         new GameController(
-                abcButtons,
-                abcLeds,
+                abcButtonsController,
+                abcLedsController,
                 digiDisplayController,
                 new Timer(digiDisplayController),
                 new Game(
                         // new RealGenerator() // TODO
-                        new MockGenerator().getSteps(), ledStrip, buzzer));
+                        new MockGenerator().getSteps(), ledStripController, buzzerController));
     }
 }
