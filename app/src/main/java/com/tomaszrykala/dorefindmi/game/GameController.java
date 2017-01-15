@@ -25,8 +25,6 @@ public class GameController implements AbcButton.Listener {
 
         this.timer = timer;
         this.game = game;
-
-        showStarter();
         start();
     }
 
@@ -43,6 +41,12 @@ public class GameController implements AbcButton.Listener {
         }
     }
 
+    private void start() {
+        showStarter();
+        timer.start();
+        restart();
+    }
+
     private void showStarter() {
         final int halfASecond = 500;
         digiDisplay.displayBlocking("3...", halfASecond);
@@ -52,15 +56,9 @@ public class GameController implements AbcButton.Listener {
     }
 
     private void restart() {
-        timer.stop();
-        start();
-    }
-
-    private void start() {
         abcButtons.setLastPressed(null);
         abcButtons.enable();
         abcLeds.reset();
-        timer.start();
         game.start();
     }
 
@@ -77,5 +75,16 @@ public class GameController implements AbcButton.Listener {
 
     public boolean isWon() {
         return game.isWon();
+    }
+
+    public void onDestroy() {
+        try {
+            abcButtons.close();
+            abcLeds.close();
+            digiDisplay.close();
+            game.onDestroy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

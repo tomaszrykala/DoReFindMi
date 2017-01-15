@@ -41,9 +41,7 @@ public class DigiDisplayController implements BaseController, Timer.Listener {
             supplier.display(text);
             try {
                 Thread.sleep(millis);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            } catch (InterruptedException ignored) {}
         }
     }
 

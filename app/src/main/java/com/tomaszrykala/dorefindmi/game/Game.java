@@ -58,4 +58,13 @@ public class Game {
     public boolean isWon() {
         return won;
     }
+
+    public void onDestroy() {
+        try {
+            ledStripController.close();
+            buzzerController.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
