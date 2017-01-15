@@ -26,6 +26,7 @@ public class GameController implements AbcButton.Listener {
         this.timer = timer;
         this.game = game;
 
+        showStarter();
         start();
     }
 
@@ -42,7 +43,20 @@ public class GameController implements AbcButton.Listener {
         }
     }
 
+    private void showStarter() {
+        final int halfASecond = 500;
+        digiDisplay.displayBlocking("3...", halfASecond);
+        digiDisplay.displayBlocking("2...", halfASecond);
+        digiDisplay.displayBlocking("1...", halfASecond);
+        digiDisplay.displayBlocking(" GO ", halfASecond);
+    }
+
     private void restart() {
+        timer.stop();
+        start();
+    }
+
+    private void start() {
         abcButtons.setLastPressed(null);
         abcButtons.enable();
         abcLeds.reset();
@@ -50,21 +64,11 @@ public class GameController implements AbcButton.Listener {
         game.start();
     }
 
-    private void start() {
-        digiDisplay.displayBlocking("3...", 200);
-        digiDisplay.displayBlocking("2...", 200);
-        digiDisplay.displayBlocking("1...", 200);
-        digiDisplay.displayBlocking("GO !", 500);
-        restart();
-    }
-
     private void stop() {
         timer.stop();
         abcButtons.disable();
-
-        // TODO: ??
-        digiDisplay.display("WON");
-//        digiDisplay.display(String.valueOf(timer.get()));
+        digiDisplay.displayBlocking("WON ", 2000);
+        digiDisplay.onCounter((int) digiDisplay.getCounter());
     }
 
     public boolean isStarted() {

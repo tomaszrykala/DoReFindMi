@@ -7,7 +7,6 @@ import com.tomaszrykala.dorefindmi.things.supplier.digidisplay.DigiDisplaySuppli
 public class DigiDisplayController implements BaseController, Timer.Listener {
 
     private final DigiDisplaySupplier supplier;
-
     private boolean isRunning;
     private long counter;
 
@@ -17,26 +16,28 @@ public class DigiDisplayController implements BaseController, Timer.Listener {
     }
 
     @Override public void onCounter(int counter) {
-        synchronized (this) {
+        synchronized (supplier) {
             supplier.display(counter);
+            this.counter = counter;
         }
-        this.counter = counter;
     }
 
-    @Override public void setIsRunning(boolean isRunning) {
-        this.isRunning = isRunning;
+    @Override public void onStart() {
+        isRunning = true;
     }
 
-    public boolean isRunning() {
-        return isRunning;
+    @Override public void onStop() {
+        isRunning = false;
     }
 
-    public long get() {
-        return counter;
+    @Override public void close() throws Exception {
+        synchronized (supplier) {
+            supplier.close();
+        }
     }
 
     public void displayBlocking(String text, int millis) {
-        synchronized (this) {
+        synchronized (supplier) {
             supplier.display(text);
             try {
                 Thread.sleep(millis);
@@ -46,15 +47,11 @@ public class DigiDisplayController implements BaseController, Timer.Listener {
         }
     }
 
-    public void display(String text) {
-        synchronized (this) {
-            supplier.display(text);
-        }
+    public boolean isRunning() {
+        return isRunning;
     }
 
-    @Override public void close() throws Exception {
-        synchronized (this) {
-            supplier.close();
-        }
+    public long getCounter() {
+        return counter;
     }
 }
