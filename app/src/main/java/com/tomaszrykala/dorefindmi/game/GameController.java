@@ -78,4 +78,15 @@ public class GameController implements AbcButton.Listener {
     public boolean isWon() {
         return game.isWon();
     }
+
+    public void onDestroy() {
+        try {
+            abcButtons.close();
+            abcLeds.close();
+            digiDisplay.close();
+            game.onDestroy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

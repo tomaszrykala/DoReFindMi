@@ -32,6 +32,7 @@ public class Timer {
         this.listener = listener;
     }
 
+    // TODO IllegalThreadStateException
     void start() {
         counter = 0;
         isRunning = true;

@@ -7,47 +7,61 @@ import com.tomaszrykala.dorefindmi.things.supplier.abcleds.AbcLedsSupplier;
 
 public class AbcLedsController implements BaseController, AbcLed.Listener {
 
+    private final boolean[] lit = new boolean[]{false, false, false};
+
     private final AbcLedsSupplier supplier;
 
     public AbcLedsController(AbcLedsSupplier abcLedsSupplier) {
         supplier = abcLedsSupplier;
     }
 
-    // TODO not needed?
     public boolean isLitAt(AbcLed abcLed) {
-        return supplier.isLitAt(abcLed);
+        switch (abcLed) {
+            case A:
+                return lit[0];
+            case B:
+                return lit[1];
+            case C:
+                return lit[2];
+            default:
+                return false;
+        }
     }
 
     @Override
     public void lightFor(AbcButton abcButton) {
-        boolean onPadA = false;
-        boolean onPadB = false;
-        boolean onPadC = false;
         switch (abcButton) {
             case A:
-                onPadA = true;
+                setLitLeds(true, false, false);
                 break;
             case B:
-                onPadB = true;
+                setLitLeds(false, true, false);
                 break;
             case C:
-                onPadC = true;
+                setLitLeds(false, false, true);
                 break;
         }
-        lightFor(onPadA, onPadB, onPadC);
+        lightFor(lit[0], lit[1], lit[2]);
     }
 
     @Override
     public void reset() {
-        lightFor(false, false, false);
+        setLitLeds(false, false, false);
+        lightFor(lit[0], lit[1], lit[2]);
+    }
+
+    @Override
+    public void close() throws Exception {
+        supplier.close();
     }
 
     private void lightFor(boolean onPadA, boolean onPadB, boolean onPadC) {
         supplier.lightFor(onPadA, onPadB, onPadC);
     }
 
-    @Override
-    public void close() throws Exception {
-        supplier.close();
+    private void setLitLeds(boolean zero, boolean one, boolean two) {
+        lit[0] = zero;
+        lit[1] = one;
+        lit[2] = two;
     }
 }

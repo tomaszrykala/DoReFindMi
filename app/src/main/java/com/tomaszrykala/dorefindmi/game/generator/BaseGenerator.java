@@ -19,7 +19,7 @@ import static com.tomaszrykala.dorefindmi.model.Note.RE;
 import static com.tomaszrykala.dorefindmi.model.Note.SI;
 import static com.tomaszrykala.dorefindmi.model.Note.SO;
 
-public abstract class BaseGenerator implements Generator {
+abstract class BaseGenerator implements Generator {
 
     final List<Note> notes = new ArrayList<>(
             Arrays.asList(new Note[]{DO_LO, RE, MI, FA, SO, LA, SI, DO_HI})
