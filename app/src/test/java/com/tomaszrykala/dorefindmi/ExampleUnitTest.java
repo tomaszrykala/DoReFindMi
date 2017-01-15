@@ -33,6 +33,7 @@ import static com.tomaszrykala.dorefindmi.model.Note.DO_LO;
 import static com.tomaszrykala.dorefindmi.model.Note.FA;
 import static com.tomaszrykala.dorefindmi.model.Note.LA;
 import static com.tomaszrykala.dorefindmi.model.Note.MI;
+import static com.tomaszrykala.dorefindmi.model.Note.MISS;
 import static com.tomaszrykala.dorefindmi.model.Note.RE;
 import static com.tomaszrykala.dorefindmi.model.Note.SI;
 import static com.tomaszrykala.dorefindmi.model.Note.SO;
@@ -41,31 +42,40 @@ public class ExampleUnitTest {
 
     @Test
     public void testNotes() throws Exception {
-        Assert.assertEquals("DO_LO", DO_LO.pitch);
+        Assert.assertEquals(261.626, DO_LO.pitch);
+        Assert.assertEquals(0, DO_LO.order);
         Assert.assertEquals(Color.YELLOW, DO_LO.led.color);
 
-        Assert.assertEquals("RE", RE.pitch);
+        Assert.assertEquals(293.665, RE.pitch);
+        Assert.assertEquals(1, RE.order);
         Assert.assertEquals(Color.GREEN, RE.led.color);
 
-        Assert.assertEquals("MI", MI.pitch);
+        Assert.assertEquals(329.628, MI.pitch);
+        Assert.assertEquals(2, MI.order);
         Assert.assertEquals(Color.CYAN, MI.led.color);
 
-        Assert.assertEquals("FA", FA.pitch);
+        Assert.assertEquals(349.228, FA.pitch);
+        Assert.assertEquals(3, FA.order);
         Assert.assertEquals(Color.BLUE, FA.led.color);
 
-        Assert.assertEquals("SO", SO.pitch);
+        Assert.assertEquals(391.995, SO.pitch);
+        Assert.assertEquals(4, SO.order);
         Assert.assertEquals(Color.LTGRAY, SO.led.color);
 
-        Assert.assertEquals("LA", Note.LA.pitch);
+        Assert.assertEquals(440.0, Note.LA.pitch);
+        Assert.assertEquals(5, LA.order);
         Assert.assertEquals(Color.MAGENTA, Note.LA.led.color);
 
-        Assert.assertEquals("SI", Note.SI.pitch);
+        Assert.assertEquals(493.883, Note.SI.pitch);
+        Assert.assertEquals(6, SI.order);
         Assert.assertEquals(Color.RED, Note.SI.led.color);
 
-        Assert.assertEquals("DO_HI", Note.DO_HI.pitch);
+        Assert.assertEquals(523.251, Note.DO_HI.pitch);
+        Assert.assertEquals(7, DO_HI.order);
         Assert.assertEquals(Color.WHITE, Note.DO_HI.led.color);
 
-        Assert.assertEquals("MISS", Note.MISS.pitch);
+        Assert.assertEquals(110.0, Note.MISS.pitch);
+        Assert.assertEquals(-1, MISS.order);
         Assert.assertEquals(Color.BLACK, Note.MISS.led.color);
     }
 
