@@ -1,17 +1,17 @@
 package com.tomaszrykala.dorefindmi.model;
 
 public enum Note {
-    DO_LO("DO_LO", Led.ZERO, 0), RE("RE", Led.ONE, 1), MI("MI", Led.TWO, 2), FA("FA", Led.THREE, 3),
-    SO("SO", Led.FOUR, 4), LA("LA", Led.FIVE, 5), SI("SI", Led.SIX, 6), DO_HI("DO_HI", Led.ALL, 7),
-    MISS("MISS", Led.NONE, -1);
+    DO_LO(Led.ZERO, 0, 261.626), RE(Led.ONE, 1, 293.665), MI(Led.TWO, 2, 329.628),
+    FA(Led.THREE, 3, 349.228), SO(Led.FOUR, 4, 391.995), LA(Led.FIVE, 5, 440), SI(Led.SIX, 6, 493.883),
+    DO_HI(Led.ALL, 7, 523.251), MISS(Led.NONE, -1, 110);
 
-    public final String pitch;
     public final Led led;
     public final int order;
+    public final double pitch;
 
-    Note(String pitch, Led led, int order) {
-        this.pitch = pitch;
+    Note(Led led, int order, double pitch) {
         this.led = led;
         this.order = order;
+        this.pitch = pitch;
     }
 }

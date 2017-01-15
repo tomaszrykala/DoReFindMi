@@ -41,25 +41,34 @@ public class Game {
 
     public boolean onPad(AbcButton abcButton) {
         final Step step = queue.poll();
-        if (step != null && step.getAbcButton() == abcButton) {
+        if (step != null) {
             final Note note = step.getNote();
-            ledStripController.light(note.led);
-            buzzerController.buzz(note);
-            if (queue.isEmpty()) {
-                started = false;
-                won = true;
+            if (notGuessed(abcButton, step)) {
+                buzzerController.buzz(Note.MISS);
+                return false;
+            } else {
+                ledStripController.light(note.led);
+                buzzerController.buzz(note);
+                if (queue.isEmpty()) {
+                    started = false;
+                    won = true;
+                }
+                return true;
             }
-            return true;
         } else {
             return false;
         }
+    }
+
+    private boolean notGuessed(AbcButton abcButton, Step step) {
+        return step.getAbcButton() != abcButton;
     }
 
     public boolean isWon() {
         return won;
     }
 
-    public void onDestroy() {
+    void onDestroy() {
         try {
             ledStripController.close();
             buzzerController.close();
