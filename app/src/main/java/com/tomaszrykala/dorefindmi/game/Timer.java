@@ -23,7 +23,8 @@ public class Timer {
                 listener.onCounter(counter);
                 try {
                     Thread.sleep(TimeUnit.SECONDS.toMillis(1));
-                } catch (InterruptedException ignored) {}
+                } catch (InterruptedException ignored) {
+                }
             }
         }
     });
@@ -31,8 +32,7 @@ public class Timer {
     public Timer(Listener listener) {
         this.listener = listener;
     }
-
-    // TODO IllegalThreadStateException
+    
     void start() {
         counter = 0;
         isRunning = true;
