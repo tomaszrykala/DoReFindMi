@@ -2,38 +2,35 @@ package com.tomaszrykala.dorefindmi.game;
 
 import com.tomaszrykala.dorefindmi.model.AbcButton;
 import com.tomaszrykala.dorefindmi.model.Note;
-import com.tomaszrykala.dorefindmi.things.Buzzer;
-import com.tomaszrykala.dorefindmi.things.LedStrip;
+import com.tomaszrykala.dorefindmi.things.controller.buzzer.BuzzerController;
+import com.tomaszrykala.dorefindmi.things.controller.ledstrip.LedStripController;
 
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Game implements PadListener {
+public class Game {
 
     private final Queue<Step> queue;
     private final List<Step> steps;
 
-    private final LedStrip ledStrip;
-    private final Buzzer buzzer;
+    private final LedStripController ledStripController;
+    private final BuzzerController buzzerController;
 
     private boolean started;
     private boolean won;
 
-
-    public Game(List<Step> steps, LedStrip ledStrip, Buzzer buzzer) {
+    public Game(List<Step> steps, LedStripController ledStripController, BuzzerController buzzerController) {
         queue = new LinkedBlockingQueue<>(steps.size());
-        this.ledStrip = ledStrip;
-        this.buzzer = buzzer;
+        this.ledStripController = ledStripController;
+        this.buzzerController = buzzerController;
         this.steps = steps;
-        started = true;
-        start();
     }
 
-    synchronized void start() {
+    public void start() {
         queue.clear();
         queue.addAll(steps);
-        ledStrip.reset();
+        ledStripController.reset();
         started = true;
         won = false;
     }
@@ -42,12 +39,12 @@ public class Game implements PadListener {
         return started;
     }
 
-    @Override public boolean onPad(AbcButton abcButton) {
+    public boolean onPad(AbcButton abcButton) {
         final Step step = queue.poll();
         if (step != null && step.getAbcButton() == abcButton) {
             final Note note = step.getNote();
-            ledStrip.light(note.led);
-            buzzer.buzz(note);
+            ledStripController.light(note.led);
+            buzzerController.buzz(note);
             if (queue.isEmpty()) {
                 started = false;
                 won = true;

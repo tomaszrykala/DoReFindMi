@@ -3,8 +3,8 @@ package com.tomaszrykala.dorefindmi.game.generator;
 import android.support.annotation.NonNull;
 
 import com.tomaszrykala.dorefindmi.game.Step;
-import com.tomaszrykala.dorefindmi.model.Note;
 import com.tomaszrykala.dorefindmi.model.AbcButton;
+import com.tomaszrykala.dorefindmi.model.Note;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,9 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class RealGenerator implements Generator {
+public class RealGenerator extends BaseGenerator {
 
-    @NonNull @Override public List<Step> getSteps(List<Note> notes, AbcButton[] abcButtons) {
+    @NonNull @Override public List<Step> getSteps() {
         final List<Step> steps = new LinkedList<>();
         while (!notes.isEmpty()) {
             final AbcButton abcButton = abcButtons[new Random().nextInt(abcButtons.length)];

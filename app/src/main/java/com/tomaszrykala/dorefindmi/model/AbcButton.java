@@ -9,6 +9,6 @@ public enum AbcButton {
     }
 
     public interface Listener {
-        void onButtonEvent(AbcButton abcButton, boolean pressed);
+        void onAbcButton(AbcButton abcButton);
     }
 }
