@@ -9,8 +9,9 @@ public class BuzzerController implements BaseController {
     private Note lastBuzzed;
     private final BuzzerSupplier supplier;
 
-    public BuzzerController(BuzzerSupplier supplier) {
-        this.supplier = supplier;
+    public BuzzerController(BuzzerSupplier buzzerSupplier) {
+        supplier = buzzerSupplier;
+        supplier.init();
     }
 
     public boolean lastBuzzedAt(Note note) {

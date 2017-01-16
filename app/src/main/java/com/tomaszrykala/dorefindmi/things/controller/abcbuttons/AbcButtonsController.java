@@ -43,6 +43,7 @@ public class AbcButtonsController implements BaseController, AbcButtonsSupplier.
     public AbcButtonsController(AbcButtonsSupplier abcButtonsSupplier) {
         supplier = abcButtonsSupplier;
         supplier.setListener(this);
+        supplier.init();
     }
 
     @Override public void onButtonEvent(AbcButton abcButton, boolean pressed) {

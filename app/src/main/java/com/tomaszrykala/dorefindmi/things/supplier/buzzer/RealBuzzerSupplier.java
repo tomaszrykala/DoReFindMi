@@ -1,5 +1,8 @@
 package com.tomaszrykala.dorefindmi.things.supplier.buzzer;
 
+import android.os.Handler;
+import android.os.HandlerThread;
+
 import com.google.android.things.contrib.driver.pwmspeaker.Speaker;
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat;
 
@@ -8,9 +11,13 @@ import java.io.IOException;
 public class RealBuzzerSupplier implements BuzzerSupplier {
 
     private Speaker speaker;
+    private Handler handler;
+    private final HandlerThread handlerThread;
 
     public RealBuzzerSupplier() {
-        init();
+        handlerThread = new HandlerThread("RealBuzzerSupplier");
+        handlerThread.start();
+        handler = new Handler(handlerThread.getLooper());
     }
 
     @Override
@@ -23,17 +30,23 @@ public class RealBuzzerSupplier implements BuzzerSupplier {
     }
 
     @Override
-    public void play(double pitch) {
-        try {
-            speaker.play(pitch); // 440
-            Thread.sleep(500);
-            speaker.stop();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void play(final double pitch) {
+        handler.post(new Runnable() {
+            @Override public void run() {
+                try {
+                    speaker.play(pitch);
+                    Thread.sleep(300);
+                    speaker.stop();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
-    @Override public void close() throws Exception {
+    @Override
+    public void close() throws Exception {
+        handlerThread.quit();
         speaker.close();
     }
 }

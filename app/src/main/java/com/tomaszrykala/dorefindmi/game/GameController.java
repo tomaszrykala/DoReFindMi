@@ -66,7 +66,7 @@ public class GameController implements AbcButton.Listener {
         timer.stop();
         abcButtons.disable();
         digiDisplay.displayBlocking("WON ", 2000);
-        digiDisplay.onCounter((int) digiDisplay.getCounter());
+        digiDisplay.onTick((int) digiDisplay.getCounter());
     }
 
     public boolean isStarted() {

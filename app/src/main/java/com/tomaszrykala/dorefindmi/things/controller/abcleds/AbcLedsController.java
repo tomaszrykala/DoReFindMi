@@ -13,6 +13,7 @@ public class AbcLedsController implements BaseController, AbcLed.Listener {
 
     public AbcLedsController(AbcLedsSupplier abcLedsSupplier) {
         supplier = abcLedsSupplier;
+        supplier.init();
     }
 
     public boolean isLitAt(AbcLed abcLed) {
