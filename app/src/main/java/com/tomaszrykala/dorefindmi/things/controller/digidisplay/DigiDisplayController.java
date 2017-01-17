@@ -16,8 +16,8 @@ public class DigiDisplayController implements BaseController, Timer.Listener {
     }
 
     @Override public void onTick(double tick) {
-        supplier.display(tick);
         counter = tick;
+        display(counter);
     }
 
     @Override public void onStart() {
@@ -30,6 +30,10 @@ public class DigiDisplayController implements BaseController, Timer.Listener {
 
     @Override public void close() throws Exception {
         supplier.close();
+    }
+
+    public void display(double n) {
+        supplier.display(n);
     }
 
     public void displayBlocking(String text, int millis) {

@@ -38,7 +38,7 @@ import static com.tomaszrykala.dorefindmi.model.Note.RE;
 import static com.tomaszrykala.dorefindmi.model.Note.SI;
 import static com.tomaszrykala.dorefindmi.model.Note.SO;
 
-public class ExampleUnitTest {
+public class DoReFindMiTests {
 
     @Test
     public void testNotes() throws Exception {
@@ -158,10 +158,9 @@ public class ExampleUnitTest {
         }
 
         Assert.assertTrue(gameController.isWon());
+        Assert.assertFalse(gameController.isStarted());
         Assert.assertFalse(abcButtonsController.isEnabled());
         Assert.assertFalse(digiDisplayController.isRunning());
-        Assert.assertFalse(gameController.isStarted());
-        Assert.assertTrue(digiDisplayController.getCounter() > 0);
     }
 
     @Test
@@ -235,10 +234,9 @@ public class ExampleUnitTest {
         }
 
         Assert.assertTrue(gameController.isWon());
+        Assert.assertFalse(gameController.isStarted());
         Assert.assertFalse(abcButtonsController.isEnabled());
         Assert.assertFalse(digiDisplayController.isRunning());
-        Assert.assertFalse(gameController.isStarted());
-        Assert.assertTrue(digiDisplayController.getCounter() > 0);
     }
 
     private List<Step> givenMockGeneratorSteps() {
