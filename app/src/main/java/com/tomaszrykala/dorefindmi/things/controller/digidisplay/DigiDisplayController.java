@@ -8,18 +8,16 @@ public class DigiDisplayController implements BaseController, Timer.Listener {
 
     private final DigiDisplaySupplier supplier;
     private boolean isRunning;
-    private long counter;
+    private double counter;
 
     public DigiDisplayController(DigiDisplaySupplier digiDisplaySupplier) {
         supplier = digiDisplaySupplier;
         supplier.init();
     }
 
-    @Override public void onCounter(int counter) {
-        synchronized (supplier) {
-            supplier.display(counter);
-            this.counter = counter;
-        }
+    @Override public void onTick(double tick) {
+        counter = tick;
+        display(counter);
     }
 
     @Override public void onStart() {
@@ -31,17 +29,18 @@ public class DigiDisplayController implements BaseController, Timer.Listener {
     }
 
     @Override public void close() throws Exception {
-        synchronized (supplier) {
-            supplier.close();
-        }
+        supplier.close();
+    }
+
+    public void display(double n) {
+        supplier.display(n);
     }
 
     public void displayBlocking(String text, int millis) {
-        synchronized (supplier) {
-            supplier.display(text);
-            try {
-                Thread.sleep(millis);
-            } catch (InterruptedException ignored) {}
+        supplier.display(text);
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException ignored) {
         }
     }
 
@@ -49,7 +48,7 @@ public class DigiDisplayController implements BaseController, Timer.Listener {
         return isRunning;
     }
 
-    public long getCounter() {
+    public double getCounter() {
         return counter;
     }
 }

@@ -21,9 +21,9 @@ import static com.tomaszrykala.dorefindmi.model.Note.SO;
 
 abstract class BaseGenerator implements Generator {
 
-    final List<Note> notes = new ArrayList<>(
-            Arrays.asList(new Note[]{DO_LO, RE, MI, FA, SO, LA, SI, DO_HI})
-    );
+    static final AbcButton[] BUTTONS = new AbcButton[]{A, B, C};
 
-    final AbcButton[] abcButtons = new AbcButton[]{A, B, C};
+    List<Note> getNotes() {
+        return new ArrayList<>(Arrays.asList(new Note[]{DO_LO, RE, MI, FA, SO, LA, SI, DO_HI}));
+    }
 }

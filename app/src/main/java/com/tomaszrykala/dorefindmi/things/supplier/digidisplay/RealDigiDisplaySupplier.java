@@ -20,7 +20,7 @@ public class RealDigiDisplaySupplier implements DigiDisplaySupplier {
         }
     }
 
-    @Override public void display(int n) {
+    @Override public void display(double n) {
         try {
             alphanumericDisplay.display(n);
         } catch (IOException e) {

@@ -14,10 +14,6 @@ public class RealAbcButtonsSupplier implements AbcButtonsSupplier {
 
     private Listener listener;
 
-    public RealAbcButtonsSupplier() {
-        init();
-    }
-
     @Override
     public void init() {
         try {

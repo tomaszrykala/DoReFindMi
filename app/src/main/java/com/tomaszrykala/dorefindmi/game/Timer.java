@@ -1,54 +1,77 @@
 package com.tomaszrykala.dorefindmi.game;
 
-import java.util.concurrent.TimeUnit;
+import android.os.Handler;
+import android.os.Message;
 
 public class Timer {
 
     public interface Listener {
-        void onCounter(int counter);
+
+        void onTick(double tick);
 
         void onStart();
 
         void onStop();
     }
 
-    private int counter;
-    private boolean isRunning;
-    private final Listener listener;
-
-    private final Thread thread = new Thread(new Runnable() {
-        @Override public void run() {
-            while (isRunning) {
-                counter++;
-                listener.onCounter(counter);
-                try {
-                    Thread.sleep(TimeUnit.SECONDS.toMillis(1));
-                } catch (InterruptedException ignored) {
-                }
-            }
-        }
-    });
+    private final CountUpTimer countUpTimer;
 
     public Timer(Listener listener) {
-        this.listener = listener;
+        countUpTimer = new CountUpTimer(100, listener);
     }
-    
+
     void start() {
-        counter = 0;
-        isRunning = true;
-        listener.onStart();
-        if (!thread.isAlive()) {
-            thread.start();
-        }
+        countUpTimer.start();
     }
 
     void stop() {
-        thread.interrupt();
-        listener.onStop();
-        isRunning = false;
+        countUpTimer.stop();
     }
 
-    public int getCounter() {
-        return counter;
+    private static class CountUpTimer {
+
+        private static final int MSG = 1;
+
+        private final Listener listener;
+
+        private int base;
+        private final int interval;
+        private Handler handler = new Handler() {
+
+            @Override
+            public void handleMessage(Message msg) {
+                synchronized (CountUpTimer.this) {
+                    base++;
+                    onTick(base / 10.0);
+                    sendMessageDelayed(obtainMessage(MSG), interval);
+                }
+            }
+        };
+
+        CountUpTimer(int interval, Listener listener) {
+            this.interval = interval;
+            this.listener = listener;
+        }
+
+        void onTick(double elapsedTime) {
+            listener.onTick(elapsedTime);
+        }
+
+        void start() {
+            reset();
+            listener.onStart();
+            handler.sendMessage(handler.obtainMessage(MSG));
+        }
+
+        void stop() {
+            listener.onStop();
+            handler.removeMessages(MSG);
+        }
+
+        void reset() {
+            synchronized (this) {
+                base = 0;
+            }
+        }
     }
 }

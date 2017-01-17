@@ -6,7 +6,7 @@ public class MockDigiDisplaySupplier implements DigiDisplaySupplier {
         System.out.println("MockDigiDisplaySupplier.init");
     }
 
-    @Override public void display(int n) {
+    @Override public void display(double n) {
         System.out.println("MockDigiDisplaySupplier.display: " + n);
     }
 

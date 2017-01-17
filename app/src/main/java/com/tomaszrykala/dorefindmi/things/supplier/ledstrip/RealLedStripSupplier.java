@@ -18,11 +18,6 @@ public class RealLedStripSupplier implements LedStripSupplier {
     private final Map<Led, Boolean> ledColorHashMap = new HashMap<>(NO_OF_LEDS);
     private Apa102 apa102;
 
-    public RealLedStripSupplier() {
-        putAll(false);
-        init();
-    }
-
     @Override public void init() {
         try {
             apa102 = RainbowHat.openLedStrip();

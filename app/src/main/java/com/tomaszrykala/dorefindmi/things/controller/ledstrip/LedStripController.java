@@ -6,25 +6,26 @@ import com.tomaszrykala.dorefindmi.things.supplier.ledstrip.LedStripSupplier;
 
 public class LedStripController implements BaseController {
 
-    private final LedStripSupplier ledStripSupplier;
+    private final LedStripSupplier supplier;
 
     public LedStripController(LedStripSupplier ledStripSupplier) {
-        this.ledStripSupplier = ledStripSupplier;
+        supplier = ledStripSupplier;
+        supplier.init();
     }
 
     public boolean isLitAt(Led led) {
-        return ledStripSupplier.isLitAt(led);
+        return supplier.isLitAt(led);
     }
 
     public void light(Led led) {
-        ledStripSupplier.light(led);
+        supplier.light(led);
     }
 
     public void reset() {
-        ledStripSupplier.reset();
+        supplier.reset();
     }
 
     @Override public void close() throws Exception {
-        ledStripSupplier.close();
+        supplier.close();
     }
 }

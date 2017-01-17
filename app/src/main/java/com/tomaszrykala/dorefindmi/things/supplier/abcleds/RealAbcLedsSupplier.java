@@ -11,10 +11,6 @@ public class RealAbcLedsSupplier implements AbcLedsSupplier {
     private Gpio ledB;
     private Gpio ledC;
 
-    public RealAbcLedsSupplier() {
-        init();
-    }
-
     @Override
     public void init() {
         try {
