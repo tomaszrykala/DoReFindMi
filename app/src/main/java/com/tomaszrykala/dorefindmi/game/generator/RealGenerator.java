@@ -16,9 +16,11 @@ public class RealGenerator extends BaseGenerator {
 
     @NonNull @Override public List<Step> getSteps() {
         final List<Step> steps = new LinkedList<>();
+        final List<Note> notes = getNotes();
+        final Random random = new Random();
         while (!notes.isEmpty()) {
-            final AbcButton abcButton = abcButtons[new Random().nextInt(abcButtons.length)];
-            final Note note = notes.remove(new Random().nextInt(notes.size()));
+            final AbcButton abcButton = BUTTONS[random.nextInt(BUTTONS.length)];
+            final Note note = notes.remove(random.nextInt(notes.size()));
             steps.add(new Step(abcButton, note));
         }
 

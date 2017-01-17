@@ -58,6 +58,7 @@ public class Timer {
         }
 
         void start() {
+            reset();
             listener.onStart();
             handler.sendMessage(handler.obtainMessage(MSG));
         }
@@ -67,7 +68,7 @@ public class Timer {
             handler.removeMessages(MSG);
         }
 
-        public void reset() {
+        void reset() {
             synchronized (this) {
                 base = 0;
             }

@@ -25,17 +25,17 @@ public class GameController implements AbcButton.Listener {
 
         this.timer = timer;
         this.game = game;
-        start();
+        startRound();
     }
 
     @Override public void onAbcButton(AbcButton abcButton) {
         if (!game.isStarted()) {
-            start();
+            startNewRound();
         } else {
             final boolean onPad = game.onPad(abcButton);
             abcButtons.setLastPressed(abcButton);
             if (!onPad) {
-                restart();
+                start();
             } else {
                 abcLeds.lightFor(abcButton);
                 if (game.isWon()) {
@@ -45,10 +45,15 @@ public class GameController implements AbcButton.Listener {
         }
     }
 
-    private void start() {
+    private void startNewRound() {
+        game.reset();
+        startRound();
+    }
+
+    private void startRound() {
         showStarter();
         timer.start();
-        restart();
+        start();
     }
 
     private void showStarter() {
@@ -59,7 +64,7 @@ public class GameController implements AbcButton.Listener {
         digiDisplay.displayBlocking(" GO ", halfASecond);
     }
 
-    private void restart() {
+    private void start() {
         abcButtons.setLastPressed(null);
         abcButtons.enable();
         abcLeds.reset();

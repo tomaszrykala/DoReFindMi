@@ -95,7 +95,7 @@ public class DoReFindMiTests {
 
     @Test
     public void testStepsGenerator() {
-        final List<Step> steps = givenMockGeneratorSteps();
+        final List<Step> steps = new MockGenerator().getSteps();
         Assert.assertEquals(8, steps.size());
         Assert.assertEquals(DO_LO, steps.get(0).getNote());
         Assert.assertEquals(RE, steps.get(1).getNote());
@@ -109,14 +109,15 @@ public class DoReFindMiTests {
 
     @Test
     public void testGame_wonInOne() {
-        final List<Step> steps = givenMockGeneratorSteps();
         final LedStripController ledStripController = new LedStripController(new MockLedStripSupplier());
         final BuzzerController buzzerController = new BuzzerController(new MockBuzzerSupplier());
+        final MockGenerator mockGenerator = new MockGenerator();
 
-        final Game game = new Game(steps, ledStripController, buzzerController);
+        final Game game = new Game(ledStripController, buzzerController, mockGenerator);
         Assert.assertFalse(game.isStarted());
         game.start();
 
+        final List<Step> steps = mockGenerator.getSteps();
         for (int i = 0; i < steps.size(); i++) {
             final Step step = steps.get(i);
             final Note note = step.getNote();
@@ -131,9 +132,9 @@ public class DoReFindMiTests {
 
     @Test
     public void testGameController_whenWon() {
-        final List<Step> steps = givenMockGeneratorSteps();
         final AbcButtonsController abcButtonsController = new AbcButtonsController(new MockAbcButtonsSupplier());
         final DigiDisplayController digiDisplayController = new NonBlockingDigiDisplayController(new MockDigiDisplaySupplier());
+        final MockGenerator mockGenerator = new MockGenerator();
         final Timer timer = new Timer(digiDisplayController);
 
         final AbcLedsController abcLedsController = new AbcLedsController(new MockAbcLedsSupplier());
@@ -142,10 +143,14 @@ public class DoReFindMiTests {
                 abcButtonsController,
                 abcLedsController, digiDisplayController,
                 timer,
-                new Game(steps, new LedStripController(new MockLedStripSupplier()), new BuzzerController(new MockBuzzerSupplier()))
+                new Game(new LedStripController(new MockLedStripSupplier()),
+                        new BuzzerController(new MockBuzzerSupplier()),
+                        mockGenerator)
         );
 
         Assert.assertTrue(gameController.isStarted());
+
+        final List<Step> steps = mockGenerator.getSteps();
 
         for (int i = 0; i < steps.size(); i++) {
             final AbcButton abcButton = steps.get(i).getAbcButton();
@@ -165,7 +170,7 @@ public class DoReFindMiTests {
 
     @Test
     public void testGameController_whenHitMissHitHitMissWon() {
-        final List<Step> steps = givenMockGeneratorSteps();
+        final MockGenerator mockGenerator = new MockGenerator();
         final AbcButtonsController abcButtonsController = new AbcButtonsController(new MockAbcButtonsSupplier());
         final DigiDisplayController digiDisplayController = new NonBlockingDigiDisplayController(new MockDigiDisplaySupplier());
         final Timer timer = new Timer(digiDisplayController);
@@ -176,10 +181,14 @@ public class DoReFindMiTests {
                 abcButtonsController,
                 abcLedsController, digiDisplayController,
                 timer,
-                new Game(steps, new LedStripController(new MockLedStripSupplier()), new BuzzerController(new MockBuzzerSupplier()))
+                new Game(new LedStripController(new MockLedStripSupplier()),
+                        new BuzzerController(new MockBuzzerSupplier()),
+                        mockGenerator)
         );
 
         Assert.assertTrue(gameController.isStarted());
+
+        final List<Step> steps = mockGenerator.getSteps();
 
         // hit
         final Step stepHit = steps.get(0);
@@ -238,9 +247,4 @@ public class DoReFindMiTests {
         Assert.assertFalse(abcButtonsController.isEnabled());
         Assert.assertFalse(digiDisplayController.isRunning());
     }
-
-    private List<Step> givenMockGeneratorSteps() {
-        return new MockGenerator().getSteps();
-    }
-
 }

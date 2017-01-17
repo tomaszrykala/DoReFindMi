@@ -6,7 +6,7 @@ import com.tomaszrykala.dorefindmi.game.Step;
 
 import java.util.List;
 
-interface Generator {
+public interface Generator {
 
     @NonNull List<Step> getSteps();
 }

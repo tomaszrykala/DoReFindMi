@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.tomaszrykala.dorefindmi.game.Game;
 import com.tomaszrykala.dorefindmi.game.GameController;
-import com.tomaszrykala.dorefindmi.game.Step;
 import com.tomaszrykala.dorefindmi.game.Timer;
 import com.tomaszrykala.dorefindmi.game.generator.RealGenerator;
 import com.tomaszrykala.dorefindmi.things.controller.abcbuttons.AbcButtonsController;
@@ -19,41 +18,37 @@ import com.tomaszrykala.dorefindmi.things.supplier.buzzer.RealBuzzerSupplier;
 import com.tomaszrykala.dorefindmi.things.supplier.digidisplay.RealDigiDisplaySupplier;
 import com.tomaszrykala.dorefindmi.things.supplier.ledstrip.RealLedStripSupplier;
 
-import java.util.List;
-
 public class DoReFindMiActivity extends Activity {
 
-    // HAT Things - should be injected
+    // HAT Things
     private RealAbcButtonsSupplier abcButtonsSupplier = new RealAbcButtonsSupplier();
     private RealAbcLedsSupplier abcLedsSupplier = new RealAbcLedsSupplier();
     private RealDigiDisplaySupplier digiDisplaySupplier = new RealDigiDisplaySupplier();
     private RealLedStripSupplier ledStripSupplier = new RealLedStripSupplier();
     private RealBuzzerSupplier realBuzzerSupplier = new RealBuzzerSupplier();
 
-    // doesn't need to be injected
     private GameController gameController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // things controllers
-        final DigiDisplayController digiDisplayController = new DigiDisplayController(digiDisplaySupplier);
+        // *things' controllers
         final AbcButtonsController abcButtonsController = new AbcButtonsController(abcButtonsSupplier);
         final AbcLedsController abcLedsController = new AbcLedsController(abcLedsSupplier);
+        final DigiDisplayController digiDisplayController = new DigiDisplayController(digiDisplaySupplier);
         final LedStripController ledStripController = new LedStripController(ledStripSupplier);
         final BuzzerController buzzerController = new BuzzerController(realBuzzerSupplier);
 
-        // game steps
-        final List<Step> steps = new RealGenerator().getSteps();
-
-        // game logic
         gameController = new GameController(
                 abcButtonsController,
                 abcLedsController,
                 digiDisplayController,
                 new Timer(digiDisplayController),
-                new Game(steps, ledStripController, buzzerController));
+                new Game(
+                        ledStripController,
+                        buzzerController,
+                        new RealGenerator()));
     }
 
     @Override
