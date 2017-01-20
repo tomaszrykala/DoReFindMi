@@ -1,7 +1,9 @@
 DoReFindMi
 ==========
 
-This is a game for [Rainbow Hat for Android Things][product] in which the aim is to find the sequence of the ABC buttons to press, which if followed in correct order, will play out the "do-re-mi" melody. The player's play time is measured for element of competitiveness.
+This is a game for [Rainbow Hat for Android Things][product] in which the aim is to find the sequence of the ABC buttons to press, which if followed in correct order, will play out the "do-re-mi" melody. The player's seek time is measured for an element of competitiveness.
+
+<img src="https://pbs.twimg.com/media/C2JGfXlUkAA1Xaf.jpg:large" width="50%" />
 
 Pre-requisites
 --------------
@@ -35,7 +37,7 @@ On Android Studio, click on the "Run" button.
 If you prefer to run on the command line, type
 ```bash
 ./gradlew installDebug
-adb shell am start com.tomaszrykala.dorefindmi.ui/.DoReFindMiActivity
+adb shell am start com.tomaszrykala.dorefindmi/.ui.DoReFindMiActivity
 ```
 
 Schematics
@@ -47,7 +49,7 @@ Contributions
 As above ;-)
 
 Next steps
-==========
+----------
 At the moment there are no hints as to what buttons should players press, akin to the popular game [Simon][simon] (I genuinely did not know of it until a friend told me this project is like it). This should probably be added, because it can be argued that currently winning a game is based on pure luck, with just a little of short term memory requirement :-)
 
 Credits
@@ -57,6 +59,22 @@ These excellent blogs helped to get this project off the ground:
 - [Testing Android Things – Unit & Vendor tests][cr-2-testing-2]
 - [The quick and simple guide to Android Things.][cr-3-simple-guide]
 - [Getting Started with Rainbow HAT][cr-4-getting-started]
+
+# License
+
+    Copyright 2016 Tomasz Rykała
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
 
 [product]: https://shop.pimoroni.com/products/rainbow-hat-for-android-things
