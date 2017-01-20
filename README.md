@@ -1,7 +1,7 @@
 DoReFindMi
 ==========
 
-This is a game for [Rainbow Hat for Android Things][product] in which the aim is to find the sequence of the ABC buttons to press, which if followed in correct order, will play out the "do-re-mi" melody. The player's seek time is measured for an element of competitiveness.
+This is a game for [Rainbow HAT for Android Things][product] in which the aim is to find the sequence of the ABC buttons to press, which if followed in correct order, will play out the "do-re-mi" melody. The player's seek time is measured for an element of competitiveness.
 
 <img src="https://pbs.twimg.com/media/C2JGfXlUkAA1Xaf.jpg:large" width="50%" />
 
@@ -9,7 +9,7 @@ Pre-requisites
 --------------
 - Android Things compatible board
 - Android Studio 2.2+
-- [Rainbow Hat for Android Things][product]
+- [Rainbow HAT for Android Things][product]
 
 Game flow and rules
 -------------------
@@ -33,7 +33,7 @@ Classes which provide access to these components implement `things.supplier.*Sup
 
 Build and install
 =================
-On Android Studio, click on the "Run" button.
+In Android Studio, click on the "Run" button.
 If you prefer to run on the command line, type
 ```bash
 ./gradlew installDebug
@@ -57,12 +57,12 @@ Credits
 These excellent blogs helped to get this project off the ground:
 - [Testing Android Things - IoT meets Java][cr-1-testing-1]
 - [Testing Android Things – Unit & Vendor tests][cr-2-testing-2]
-- [The quick and simple guide to Android Things.][cr-3-simple-guide]
+- [The quick and simple guide to Android Things][cr-3-simple-guide]
 - [Getting Started with Rainbow HAT][cr-4-getting-started]
 
 # License
 
-    Copyright 2016 Tomasz Rykała
+    Copyright 2017 Tomasz Rykała
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
