@@ -8,7 +8,7 @@
 
         <uses-library android:name="com.google.android.things"/>
 
-        <activity android:name=".ui.DoReFindMiActivity">
+        <activity android:name=".DoReFindMiActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

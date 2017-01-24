@@ -37,7 +37,7 @@ In Android Studio, click on the "Run" button.
 If you prefer to run on the command line, type
 ```bash
 ./gradlew installDebug
-adb shell am start com.tomaszrykala.dorefindmi/.ui.DoReFindMiActivity
+adb shell am start com.tomaszrykala.dorefindmi/.DoReFindMiActivity
 ```
 
 Schematics

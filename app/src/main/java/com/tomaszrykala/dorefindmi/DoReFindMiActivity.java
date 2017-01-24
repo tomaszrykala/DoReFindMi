@@ -1,4 +1,4 @@
-package com.tomaszrykala.dorefindmi.ui;
+package com.tomaszrykala.dorefindmi;
 
 import android.app.Activity;
 import android.os.Bundle;
