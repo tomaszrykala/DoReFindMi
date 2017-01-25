@@ -6,7 +6,7 @@ import com.google.android.things.contrib.driver.rainbowhat.RainbowHat;
 
 import java.io.IOException;
 
-public class RealDigiDisplaySupplier implements DigiDisplaySupplier {
+public class DigiDisplaySupplierImpl implements DigiDisplaySupplier {
 
     private AlphanumericDisplay alphanumericDisplay;
 

@@ -5,7 +5,7 @@ import com.google.android.things.pio.Gpio;
 
 import java.io.IOException;
 
-public class RealAbcLedsSupplier implements AbcLedsSupplier {
+public class AbcLedsSupplierImpl implements AbcLedsSupplier {
 
     private Gpio ledA;
     private Gpio ledB;
