@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class RealGenerator extends BaseGenerator {
+public class GeneratorImpl extends BaseGenerator {
 
     @NonNull @Override public List<Step> getSteps() {
         final List<Step> steps = new LinkedList<>();

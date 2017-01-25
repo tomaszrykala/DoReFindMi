@@ -6,7 +6,7 @@ import com.tomaszrykala.dorefindmi.model.AbcButton;
 
 import java.io.IOException;
 
-public class RealAbcButtonsSupplier implements AbcButtonsSupplier {
+public class AbcButtonsSupplierImpl implements AbcButtonsSupplier {
 
     private Button buttonA;
     private Button buttonB;

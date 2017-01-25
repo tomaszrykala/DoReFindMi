@@ -3,6 +3,8 @@ package com.tomaszrykala.dorefindmi.game;
 import android.os.Handler;
 import android.os.Message;
 
+import static com.tomaszrykala.dorefindmi.game.Timer.CountUpHandler.MSG;
+
 public class Timer {
 
     public interface Listener {
@@ -14,58 +16,50 @@ public class Timer {
         void onStop();
     }
 
-    private final CountUpTimer countUpTimer;
+    private final CountUpHandler handler = new CountUpHandler(this);
+
+    private final Listener listener;
 
     public Timer(Listener listener) {
-        countUpTimer = new CountUpTimer(100, listener);
+        this.listener = listener;
     }
 
     void start() {
-        countUpTimer.start();
+        reset();
+        listener.onStart();
+        handler.sendMessage(handler.obtainMessage(MSG));
     }
 
     void stop() {
-        countUpTimer.stop();
+        listener.onStop();
+        handler.removeMessages(MSG);
     }
 
-    private static class CountUpTimer {
+    private void onTick(double elapsedTime) {
+        listener.onTick(elapsedTime);
+    }
 
-        private static final int MSG = 1;
+    private void reset() {
+        handler.reset();
+    }
 
-        private final Listener listener;
+    static class CountUpHandler extends Handler {
+
+        static final int MSG = 1;
 
         private int base;
-        private final int interval;
-        private Handler handler = new Handler() {
+        private final Timer timer;
 
-            @Override
-            public void handleMessage(Message msg) {
-                synchronized (CountUpTimer.this) {
-                    base++;
-                    onTick(base / 10.0);
-                    sendMessageDelayed(obtainMessage(MSG), interval);
-                }
+        CountUpHandler(Timer timer) {
+            this.timer = timer;
+        }
+
+        @Override public void handleMessage(Message msg) {
+            synchronized (this) {
+                base++;
+                timer.onTick(base / 10.0);
+                sendMessageDelayed(obtainMessage(MSG), 100);
             }
-        };
-
-        CountUpTimer(int interval, Listener listener) {
-            this.interval = interval;
-            this.listener = listener;
-        }
-
-        void onTick(double elapsedTime) {
-            listener.onTick(elapsedTime);
-        }
-
-        void start() {
-            reset();
-            listener.onStart();
-            handler.sendMessage(handler.obtainMessage(MSG));
-        }
-
-        void stop() {
-            listener.onStop();
-            handler.removeMessages(MSG);
         }
 
         void reset() {

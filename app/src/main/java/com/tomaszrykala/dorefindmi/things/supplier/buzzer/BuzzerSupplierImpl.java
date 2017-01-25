@@ -8,14 +8,14 @@ import com.google.android.things.contrib.driver.rainbowhat.RainbowHat;
 
 import java.io.IOException;
 
-public class RealBuzzerSupplier implements BuzzerSupplier {
+public class BuzzerSupplierImpl implements BuzzerSupplier {
 
     private Speaker speaker;
     private Handler handler;
     private final HandlerThread handlerThread;
 
-    public RealBuzzerSupplier() {
-        handlerThread = new HandlerThread("RealBuzzerSupplier");
+    public BuzzerSupplierImpl() {
+        handlerThread = new HandlerThread("BuzzerSupplierImpl");
         handlerThread.start();
         handler = new Handler(handlerThread.getLooper());
     }

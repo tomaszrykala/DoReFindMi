@@ -13,7 +13,7 @@ import java.util.Map;
 import static com.google.android.things.contrib.driver.rainbowhat.RainbowHat.BUS_LEDSTRIP;
 import static com.google.android.things.contrib.driver.rainbowhat.RainbowHat.LEDSTRIP_LENGTH;
 
-public class RealLedStripSupplier implements LedStripSupplier {
+public class LedStripSupplierImpl implements LedStripSupplier {
 
     private static final int MAX_BRIGHTNESS = 7; // max = 31
 
