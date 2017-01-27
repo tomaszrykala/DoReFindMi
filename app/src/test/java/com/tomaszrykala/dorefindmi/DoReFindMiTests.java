@@ -74,7 +74,7 @@ public class DoReFindMiTests {
         Assert.assertEquals(7, DO_HI.order);
         Assert.assertEquals(Color.WHITE, Note.DO_HI.led.color);
 
-        Assert.assertEquals(110.0, Note.MISS.pitch);
+        Assert.assertEquals(130.813, Note.MISS.pitch);
         Assert.assertEquals(-1, MISS.order);
         Assert.assertEquals(Color.BLACK, Note.MISS.led.color);
     }
