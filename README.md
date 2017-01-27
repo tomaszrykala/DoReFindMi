@@ -20,9 +20,14 @@ Game flow and rules
 - The round is won when the player completes the sentence after which the alphanumeric display displays “WON!” followed by the time it took the player to win
 - A game is restarted by pressing on the buttons again, when a new sequence of steps is generated, and next players can attempt to complete their rounds in fastest time
 
+Demo
+----
+
+[![Demo](http://img.youtube.com/vi/TQV3Urz2B_Y/0.jpg)](https://www.youtube.com/watch?v=TQV3Urz2B_Y)
+
 Dependencies and architecture
 -----------------------------
-The game makes use of the following components of [Rainbow HAT][product]:
+The game makes use of the following individual components provided by [Rainbow HAT][product]:
 - Buttons
 - Gpio Leds
 - Piezo Speaker
