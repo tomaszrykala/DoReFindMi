@@ -17,7 +17,7 @@ Game flow and rules
 - The player needs to guess the order of the 8-step order of the  A, B, C buttons
 - When pressed in correct order, the buzzer plays the “do-re-mi” melody, and the led strip lights up the leds one by one, from left to right
 - When an incorrect button is pressed a low-frequency sound is played out, the led lights reset and the player has to guess the order from the start
-- The round is won when the player completes the sentence after which the alphanumeric display displays “WON!” followed by the time it took the player to win
+- The round is won when the player completes the sequence after which the alphanumeric display displays `WON!` followed by the time it took the player to win
 - A game is restarted by pressing on the buttons again, when a new sequence of steps is generated, and next players can attempt to complete their rounds in fastest time
 
 Demo
@@ -34,7 +34,7 @@ The game makes use of the following individual components provided by [Rainbow H
 - Apa102 Led Strip
 - Alphanumeric Display
 
-Classes which provide access to these components implement `things.supplier.*Supplier` adapter interfaces and contain minimal logic themselves to allow replacing them with other compatible devices, or a subset thereof, or stubs in tests. There are unit tests which do just that in the test source set. The logic of interaction with the devices is implemented in their respective `things.controller.*Controller` classes. A Game contains of rounds which are initiated and announced when completed by `GameController` class, and Player’s \*moves/guesses\* are validated by `Game` class.
+Classes which provide access to these components implement `things.supplier.*Supplier` adapter interfaces and contain minimal logic to enable replacing them with other compatible devices, or a subset thereof, or stubs in tests. There are unit tests which do just that in the `test` source set. The logic of interaction with the devices is implemented in their respective `things.controller.*Controller` classes. A game contains of rounds which are initiated and announced when completed by `GameController` class, and Player’s \*moves/guesses\* are validated by `Game` class.
 
 Build and install
 =================
