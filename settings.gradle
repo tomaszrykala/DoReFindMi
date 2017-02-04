@@ -1,1 +1,1 @@
-include ':app', ':piano-keys-freq-hz'
+include ':app', ':pianofreqs'

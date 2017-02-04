@@ -1,10 +1,10 @@
-package com.tomaszrykala.pianokeys;
+package com.tomaszrykala.pianofreqs;
 
 /**
- * This is a list of the absolute frequencies in hertz (cycles per second) of the keys of a modern 88-key standard or
- * 102-key extended piano in twelve-tone equal temperament, with the 49th key, the fifth A (called A4), tuned to 440 Hz
- * (referred to as A440). EAsh suCsessive pitch is derived by multiplying (ascending) or dividing (descending)
- * the previous by the twelfth root of two (approximately 1.05946).
+ * This is a list of the absolute frequencies in hertz (cycles per second) of the keys of a modern
+ * 88-key standard or 102-key extended piano in twelve-tone equal temperament, with the 49th key,
+ * the fifth A (called A4), tuned to 440 Hz (referred to as A440). Each successive pitch is derived
+ * by multiplying (ascending) or dividing (descending) the previous by the twelfth root of two.
  * <p>
  * Source: https://en.wikipedia.org/wiki/Piano_key_frequencies
  * <p>
