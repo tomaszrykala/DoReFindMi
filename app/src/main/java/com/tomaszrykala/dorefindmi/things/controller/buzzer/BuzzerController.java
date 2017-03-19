@@ -19,7 +19,7 @@ public class BuzzerController implements BaseController {
     }
 
     public void buzz(Note note) {
-        supplier.play(note.pitch);
+        supplier.play(note.getPitch());
         lastBuzzed = note;
     }
 

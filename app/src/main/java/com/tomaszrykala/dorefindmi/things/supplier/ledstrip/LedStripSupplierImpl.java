@@ -51,7 +51,7 @@ public class LedStripSupplierImpl implements LedStripSupplier {
     private void light() {
         final int[] colors = new int[LEDSTRIP_LENGTH];
         for (Led led : ledColorHashMap.keySet()) {
-            colors[led.index] = ledColorHashMap.get(led) ? led.color : Color.BLACK;
+            colors[led.getIndex()] = ledColorHashMap.get(led) ? led.getColor() : Color.BLACK;
         }
 
         try {
