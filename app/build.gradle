@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 24
@@ -28,4 +29,8 @@ dependencies {
     compile 'com.google.android.things.contrib:driver-button:0.2'
     compile 'com.google.android.things.contrib:driver-ht16k33:0.2'
     compile 'com.google.android.things.contrib:driver-pwmspeaker:0.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
