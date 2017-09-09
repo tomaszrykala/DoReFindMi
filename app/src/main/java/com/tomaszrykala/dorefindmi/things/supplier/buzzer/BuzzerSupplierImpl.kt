@@ -10,29 +10,22 @@ import java.io.IOException
 
 class BuzzerSupplierImpl : BuzzerSupplier {
 
-    private var speaker: Speaker? = null
-    private val handler: Handler
+    private val speaker: Speaker by lazy { RainbowHat.openPiezo() }
+
+    private val handler: Handler by lazy {
+        handlerThread.start()
+        Handler(handlerThread.looper)
+    }
     private val handlerThread: HandlerThread = HandlerThread("BuzzerSupplierImpl")
 
-    init {
-        handlerThread.start()
-        handler = Handler(handlerThread.looper)
-    }
-
-    override fun init() {
-        try {
-            speaker = RainbowHat.openPiezo()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
+    override fun init() {}
 
     override fun play(pitch: Double) {
         handler.post {
             try {
-                speaker!!.play(pitch)
+                speaker.play(pitch)
                 Thread.sleep(300)
-                speaker!!.stop()
+                speaker.stop()
             } catch (e: IOException) {
                 e.printStackTrace()
             } catch (e: InterruptedException) {
@@ -44,6 +37,6 @@ class BuzzerSupplierImpl : BuzzerSupplier {
     @Throws(Exception::class)
     override fun close() {
         handlerThread.quit()
-        speaker!!.close()
+        speaker.close()
     }
 }

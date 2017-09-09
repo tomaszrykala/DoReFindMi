@@ -13,7 +13,12 @@ class GameController(private val abcButtons: AbcButtonsController,
 
     init {
         abcButtons.setListener(this)
-        startRound()
+    }
+
+    fun startRound() {
+        showStarter()
+        timer.start()
+        start()
     }
 
     override fun onAbcButton(abcButton: AbcButton) {
@@ -36,12 +41,6 @@ class GameController(private val abcButtons: AbcButtonsController,
     private fun startNewRound() {
         game.reset()
         startRound()
-    }
-
-    private fun startRound() {
-        showStarter()
-        timer.start()
-        start()
     }
 
     private fun showStarter() {

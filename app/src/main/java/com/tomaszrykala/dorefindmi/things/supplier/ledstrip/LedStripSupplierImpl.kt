@@ -11,12 +11,11 @@ import java.util.*
 class LedStripSupplierImpl : LedStripSupplier {
 
     private val ledColorHashMap = HashMap<Led, Boolean>(LEDSTRIP_LENGTH)
-    private var apa102: Apa102? = null
+    private val apa102: Apa102 by lazy { openLedStrip() }
 
     override fun init() {
         try {
-            apa102 = openLedStrip()
-            apa102!!.brightness = MAX_BRIGHTNESS
+            apa102.brightness = 7
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -27,10 +26,9 @@ class LedStripSupplierImpl : LedStripSupplier {
     }
 
     override fun light(led: Led) {
-        if (led === Led.ALL) {
-            putAll(true)
-        } else {
-            ledColorHashMap.put(led, true)
+        when (led) {
+            Led.ALL -> putAll(true)
+            else -> ledColorHashMap.put(led, true)
         }
         light()
     }
@@ -47,7 +45,7 @@ class LedStripSupplierImpl : LedStripSupplier {
         }
 
         try {
-            apa102!!.write(colors)
+            apa102.write(colors)
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -65,7 +63,7 @@ class LedStripSupplierImpl : LedStripSupplier {
 
     @Throws(Exception::class)
     override fun close() {
-        apa102!!.close()
+        apa102.close()
     }
 
     /**
@@ -74,10 +72,5 @@ class LedStripSupplierImpl : LedStripSupplier {
     @Throws(IOException::class)
     private fun openLedStrip(): Apa102 {
         return Apa102(BUS_LEDSTRIP, Apa102.Mode.BGR, Apa102.Direction.REVERSED)
-    }
-
-    companion object {
-
-        private val MAX_BRIGHTNESS = 7 // max = 31
     }
 }

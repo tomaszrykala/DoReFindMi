@@ -19,38 +19,28 @@ import com.tomaszrykala.dorefindmi.things.supplier.ledstrip.LedStripSupplierImpl
 
 class DoReFindMiActivity : Activity() {
 
-    // Android Things drivers
-    private val abcButtonsSupplier = AbcButtonsSupplierImpl()
-    private val abcLedsSupplier = AbcLedsSupplierImpl()
-    private val digiDisplaySupplier = DigiDisplaySupplierImpl()
-    private val ledStripSupplier = LedStripSupplierImpl()
-    private val buzzerSupplier = BuzzerSupplierImpl()
+    private val abcButtonsController = AbcButtonsController(AbcButtonsSupplierImpl())
+    private val abcLedsController = AbcLedsController(AbcLedsSupplierImpl())
+    private val digiDisplayController = DigiDisplayController(DigiDisplaySupplierImpl())
+    private val ledStripController = LedStripController(LedStripSupplierImpl())
+    private val buzzerController = BuzzerController(BuzzerSupplierImpl())
 
-    private var gameController: GameController? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // driver Controllers
-        val abcButtonsController = AbcButtonsController(abcButtonsSupplier)
-        val abcLedsController = AbcLedsController(abcLedsSupplier)
-        val digiDisplayController = DigiDisplayController(digiDisplaySupplier)
-        val ledStripController = LedStripController(ledStripSupplier)
-        val buzzerController = BuzzerController(buzzerSupplier)
-
-        gameController = GameController(
+    private val gameController: GameController by lazy {
+        GameController(
                 abcButtonsController,
                 abcLedsController,
                 digiDisplayController,
                 Timer(digiDisplayController),
-                Game(
-                        ledStripController,
-                        buzzerController,
-                        GeneratorImpl()))
+                Game(ledStripController, buzzerController, GeneratorImpl()))
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        gameController.startRound()
     }
 
     override fun onDestroy() {
-        gameController!!.onDestroy()
+        gameController.onDestroy()
         super.onDestroy()
     }
 }

@@ -4,29 +4,18 @@ import com.google.android.things.contrib.driver.button.Button
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat
 import com.tomaszrykala.dorefindmi.model.AbcButton
 
-import java.io.IOException
-
 class AbcButtonsSupplierImpl : AbcButtonsSupplier {
 
-    private var buttonA: Button? = null
-    private var buttonB: Button? = null
-    private var buttonC: Button? = null
+    private val buttonA: Button by lazy { RainbowHat.openButton(RainbowHat.BUTTON_A) }
+    private val buttonB: Button by lazy { RainbowHat.openButton(RainbowHat.BUTTON_B) }
+    private val buttonC: Button by lazy { RainbowHat.openButton(RainbowHat.BUTTON_C) }
 
-    private var listener: AbcButtonsSupplier.Listener? = null
+    private lateinit var listener: AbcButtonsSupplier.Listener
 
     override fun init() {
-        try {
-            buttonA = RainbowHat.openButton(RainbowHat.BUTTON_A)
-            buttonB = RainbowHat.openButton(RainbowHat.BUTTON_B)
-            buttonC = RainbowHat.openButton(RainbowHat.BUTTON_C)
-
-            buttonA!!.setOnButtonEventListener(this)
-            buttonB!!.setOnButtonEventListener(this)
-            buttonC!!.setOnButtonEventListener(this)
-
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        buttonA.setOnButtonEventListener(this)
+        buttonB.setOnButtonEventListener(this)
+        buttonC.setOnButtonEventListener(this)
     }
 
     override fun setListener(listener: AbcButtonsSupplier.Listener) {
@@ -34,19 +23,17 @@ class AbcButtonsSupplierImpl : AbcButtonsSupplier {
     }
 
     override fun onButtonEvent(button: Button, pressed: Boolean) {
-        if (button === buttonA) {
-            listener!!.onButtonEvent(AbcButton.A, pressed)
-        } else if (button === buttonB) {
-            listener!!.onButtonEvent(AbcButton.B, pressed)
-        } else if (button === buttonC) {
-            listener!!.onButtonEvent(AbcButton.C, pressed)
+        when (button) {
+            buttonA -> listener.onButtonEvent(AbcButton.A, pressed)
+            buttonB -> listener.onButtonEvent(AbcButton.B, pressed)
+            buttonC -> listener.onButtonEvent(AbcButton.C, pressed)
         }
     }
 
     @Throws(Exception::class)
     override fun close() {
-        buttonA!!.close()
-        buttonB!!.close()
-        buttonC!!.close()
+        buttonA.close()
+        buttonB.close()
+        buttonC.close()
     }
 }
