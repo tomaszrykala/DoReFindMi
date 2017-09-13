@@ -7,25 +7,17 @@ import java.io.IOException
 
 class AbcLedsSupplierImpl : AbcLedsSupplier {
 
-    private var ledA: Gpio? = null
-    private var ledB: Gpio? = null
-    private var ledC: Gpio? = null
+    private val ledA: Gpio by lazy { RainbowHat.openLed(RainbowHat.LED_RED) }
+    private val ledB: Gpio by lazy { RainbowHat.openLed(RainbowHat.LED_GREEN) }
+    private val ledC: Gpio by lazy { RainbowHat.openLed(RainbowHat.LED_BLUE) }
 
-    override fun init() {
-        try {
-            ledA = RainbowHat.openLed(RainbowHat.LED_RED)
-            ledB = RainbowHat.openLed(RainbowHat.LED_GREEN)
-            ledC = RainbowHat.openLed(RainbowHat.LED_BLUE)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
+    override fun init() {}
 
     override fun lightFor(onPadA: Boolean, onPadB: Boolean, onPadC: Boolean) {
         try {
-            ledA!!.value = onPadA
-            ledB!!.value = onPadB
-            ledC!!.value = onPadC
+            ledA.value = onPadA
+            ledB.value = onPadB
+            ledC.value = onPadC
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -33,8 +25,8 @@ class AbcLedsSupplierImpl : AbcLedsSupplier {
 
     @Throws(Exception::class)
     override fun close() {
-        ledA!!.close()
-        ledB!!.close()
-        ledC!!.close()
+        ledA.close()
+        ledB.close()
+        ledC.close()
     }
 }

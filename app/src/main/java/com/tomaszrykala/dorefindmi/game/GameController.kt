@@ -13,7 +13,12 @@ class GameController(private val abcButtons: AbcButtonsController,
 
     init {
         abcButtons.setListener(this)
-        startRound()
+    }
+
+    fun startRound() {
+        showStarter()
+        timer.start()
+        start()
     }
 
     override fun onAbcButton(abcButton: AbcButton) {
@@ -38,12 +43,6 @@ class GameController(private val abcButtons: AbcButtonsController,
         startRound()
     }
 
-    private fun startRound() {
-        showStarter()
-        timer.start()
-        start()
-    }
-
     private fun showStarter() {
         val halfASecond = 500
         digiDisplay.displayBlocking("3...", halfASecond)
@@ -62,7 +61,7 @@ class GameController(private val abcButtons: AbcButtonsController,
     private fun stop() {
         timer.stop()
         abcButtons.disable()
-        digiDisplay.displayBlocking("WON ", 2000)
+        digiDisplay.displayBlocking("WIN ", 2000)
         digiDisplay.display(digiDisplay.counter)
     }
 

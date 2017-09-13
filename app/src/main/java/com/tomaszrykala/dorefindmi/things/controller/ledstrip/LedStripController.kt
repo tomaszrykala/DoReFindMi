@@ -10,9 +10,7 @@ class LedStripController(private val supplier: LedStripSupplier) : BaseControlle
         supplier.init()
     }
 
-    fun isLitAt(led: Led): Boolean {
-        return supplier.isLitAt(led)
-    }
+    fun isLitAt(led: Led): Boolean = supplier.isLitAt(led)
 
     fun light(led: Led) {
         supplier.light(led)

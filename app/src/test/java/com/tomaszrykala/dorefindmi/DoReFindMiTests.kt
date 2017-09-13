@@ -133,6 +133,8 @@ class DoReFindMiTests {
                         mockGenerator)
         )
 
+        gameController.startRound()
+
         assertTrue(gameController.isStarted)
 
         val steps = mockGenerator.steps
@@ -170,6 +172,8 @@ class DoReFindMiTests {
                         BuzzerController(MockBuzzerSupplier()),
                         mockGenerator)
         )
+
+        gameController.startRound()
 
         assertTrue(gameController.isStarted)
 

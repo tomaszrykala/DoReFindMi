@@ -23,17 +23,13 @@ class AbcButtonsController(private val supplier: AbcButtonsSupplier) : BaseContr
         isEnabled = false
     }
 
-    fun isLastPressed(abcButton: AbcButton): Boolean {
-        return lastPressed === abcButton
-    }
+    fun isLastPressed(abcButton: AbcButton): Boolean = lastPressed === abcButton
 
     fun setLastPressed(abcButton: AbcButton?) {
         lastPressed = abcButton
     }
 
-    fun hasLastPressed(): Boolean {
-        return lastPressed != null
-    }
+    fun hasLastPressed(): Boolean = lastPressed != null
 
     init {
         supplier.setListener(this)
