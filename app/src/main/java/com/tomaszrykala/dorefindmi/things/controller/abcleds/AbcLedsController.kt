@@ -13,13 +13,10 @@ class AbcLedsController(private val supplier: AbcLedsSupplier) : BaseController,
         supplier.init()
     }
 
-    fun isLitAt(abcLed: AbcLed): Boolean {
-        when (abcLed) {
-            AbcLed.A -> return lit[0]
-            AbcLed.B -> return lit[1]
-            AbcLed.C -> return lit[2]
-            else -> return false
-        }
+    fun isLitAt(abcLed: AbcLed): Boolean = when (abcLed) {
+        AbcLed.A -> lit[0]
+        AbcLed.B -> lit[1]
+        AbcLed.C -> lit[2]
     }
 
     override fun lightFor(abcButton: AbcButton) {

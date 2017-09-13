@@ -2,7 +2,8 @@ package com.tomaszrykala.dorefindmi.game
 
 import android.os.Handler
 import android.os.Message
-import com.tomaszrykala.dorefindmi.game.Timer.CountUpHandler.Companion.MSG
+
+const val MSG = 1
 
 class Timer(private val listener: Timer.Listener) {
 
@@ -52,10 +53,6 @@ class Timer(private val listener: Timer.Listener) {
             synchronized(this) {
                 base = 0
             }
-        }
-
-        companion object {
-            val MSG = 1
         }
     }
 }

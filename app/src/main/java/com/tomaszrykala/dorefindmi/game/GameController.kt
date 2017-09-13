@@ -61,7 +61,7 @@ class GameController(private val abcButtons: AbcButtonsController,
     private fun stop() {
         timer.stop()
         abcButtons.disable()
-        digiDisplay.displayBlocking("WON ", 2000)
+        digiDisplay.displayBlocking("WIN ", 2000)
         digiDisplay.display(digiDisplay.counter)
     }
 

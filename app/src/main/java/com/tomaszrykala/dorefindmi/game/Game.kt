@@ -43,9 +43,9 @@ class Game(private val ledStripController: LedStripController,
         val step = stepQueue.poll()
         if (step != null) {
             val note = step.note
-            if (notGuessed(abcButton, step)) {
+            return if (notGuessed(abcButton, step)) {
                 buzzerController.buzz(Note.MISS)
-                return false
+                false
             } else {
                 ledStripController.light(note.led)
                 buzzerController.buzz(note)
@@ -53,16 +53,14 @@ class Game(private val ledStripController: LedStripController,
                     isStarted = false
                     isWon = true
                 }
-                return true
+                true
             }
         } else {
             return false
         }
     }
 
-    private fun notGuessed(abcButton: AbcButton, step: Step): Boolean {
-        return step.abcButton != abcButton
-    }
+    private fun notGuessed(abcButton: AbcButton, step: Step): Boolean = step.abcButton != abcButton
 
     internal fun onDestroy() {
         try {
