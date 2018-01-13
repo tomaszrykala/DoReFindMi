@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.tomaszrykala.dorefindmi"
-        minSdkVersion 24
-        targetSdkVersion 25
+        minSdkVersion 26
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -19,16 +19,16 @@ android {
 dependencies {
     testCompile 'junit:junit:4.12'
 
-    provided 'com.google.android.things:androidthings:0.2-devpreview'
+    provided 'com.google.android.things:androidthings:0.6.1-devpreview'
 
     // Rainbow HAT driver factory
-    compile 'com.google.android.things.contrib:driver-rainbowhat:0.2'
+    compile 'com.google.android.things.contrib:driver-rainbowhat:0.8'
 
     // drivers
-    compile 'com.google.android.things.contrib:driver-apa102:0.2'
-    compile 'com.google.android.things.contrib:driver-button:0.2'
-    compile 'com.google.android.things.contrib:driver-ht16k33:0.2'
-    compile 'com.google.android.things.contrib:driver-pwmspeaker:0.1'
+    compile 'com.google.android.things.contrib:driver-apa102:0.5'
+    compile 'com.google.android.things.contrib:driver-button:0.5'
+    compile 'com.google.android.things.contrib:driver-ht16k33:0.4'
+    compile 'com.google.android.things.contrib:driver-pwmspeaker:0.3'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 repositories {

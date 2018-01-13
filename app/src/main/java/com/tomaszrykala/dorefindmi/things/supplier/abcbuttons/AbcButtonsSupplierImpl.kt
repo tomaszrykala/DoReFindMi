@@ -6,9 +6,9 @@ import com.tomaszrykala.dorefindmi.model.AbcButton
 
 class AbcButtonsSupplierImpl : AbcButtonsSupplier {
 
-    private val buttonA: Button by lazy { RainbowHat.openButton(RainbowHat.BUTTON_A) }
-    private val buttonB: Button by lazy { RainbowHat.openButton(RainbowHat.BUTTON_B) }
-    private val buttonC: Button by lazy { RainbowHat.openButton(RainbowHat.BUTTON_C) }
+    private val buttonA: Button by lazy { RainbowHat.openButtonA() }
+    private val buttonB: Button by lazy { RainbowHat.openButtonB() }
+    private val buttonC: Button by lazy { RainbowHat.openButtonC() }
 
     private lateinit var listener: AbcButtonsSupplier.Listener
 

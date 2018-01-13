@@ -7,9 +7,9 @@ import java.io.IOException
 
 class AbcLedsSupplierImpl : AbcLedsSupplier {
 
-    private val ledA: Gpio by lazy { RainbowHat.openLed(RainbowHat.LED_RED) }
-    private val ledB: Gpio by lazy { RainbowHat.openLed(RainbowHat.LED_GREEN) }
-    private val ledC: Gpio by lazy { RainbowHat.openLed(RainbowHat.LED_BLUE) }
+    private val ledA: Gpio by lazy { RainbowHat.openLedRed() }
+    private val ledB: Gpio by lazy { RainbowHat.openLedGreen() }
+    private val ledC: Gpio by lazy { RainbowHat.openLedBlue() }
 
     override fun init() {}
 

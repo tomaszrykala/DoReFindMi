@@ -8,14 +8,14 @@ import java.io.IOException
 
 class DigiDisplaySupplierImpl : DigiDisplaySupplier {
 
-    private val alphanumericDisplay: AlphanumericDisplay by lazy {
-        RainbowHat.openDisplay()
-    }
+    private val alphanumericDisplay: AlphanumericDisplay by lazy { RainbowHat.openDisplay() }
 
     override fun init() {
         try {
-            alphanumericDisplay.setBrightness(Ht16k33.HT16K33_BRIGHTNESS_MAX)
-            alphanumericDisplay.setEnabled(true)
+            alphanumericDisplay.apply {
+                setBrightness(Ht16k33.HT16K33_BRIGHTNESS_MAX)
+                setEnabled(true)
+            }
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -39,6 +39,9 @@ class DigiDisplaySupplierImpl : DigiDisplaySupplier {
 
     @Throws(Exception::class)
     override fun close() {
-        alphanumericDisplay.close()
+        alphanumericDisplay.apply {
+            clear()
+            close()
+        }
     }
 }
