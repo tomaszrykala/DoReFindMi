@@ -1,8 +1,8 @@
 package com.tomaszrykala.dorefindmi.game.generator
 
-import com.tomaszrykala.dorefindmi.game.Step
-import com.tomaszrykala.dorefindmi.model.AbcButton.*
-import com.tomaszrykala.dorefindmi.model.Note
+import com.tomaszrykala.dorefindmi.domain.Step
+import com.tomaszrykala.dorefindmi.domain.AbcButton.*
+import com.tomaszrykala.dorefindmi.domain.Note
 
 class MockGenerator : Generator {
 

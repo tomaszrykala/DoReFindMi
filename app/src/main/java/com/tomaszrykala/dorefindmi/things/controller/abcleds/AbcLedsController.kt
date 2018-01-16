@@ -1,7 +1,7 @@
 package com.tomaszrykala.dorefindmi.things.controller.abcleds
 
-import com.tomaszrykala.dorefindmi.model.AbcButton
-import com.tomaszrykala.dorefindmi.model.AbcLed
+import com.tomaszrykala.dorefindmi.domain.AbcButton
+import com.tomaszrykala.dorefindmi.domain.AbcLed
 import com.tomaszrykala.dorefindmi.things.controller.BaseController
 import com.tomaszrykala.dorefindmi.things.supplier.abcleds.AbcLedsSupplier
 

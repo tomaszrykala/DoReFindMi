@@ -1,6 +1,6 @@
 package com.tomaszrykala.dorefindmi.things.supplier.ledstrip
 
-import com.tomaszrykala.dorefindmi.model.Led
+import com.tomaszrykala.dorefindmi.domain.Led
 
 class MockLedStripSupplier : LedStripSupplier {
 

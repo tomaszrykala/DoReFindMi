@@ -4,7 +4,7 @@ import android.graphics.Color
 import com.google.android.things.contrib.driver.apa102.Apa102
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat.LEDSTRIP_LENGTH
-import com.tomaszrykala.dorefindmi.model.Led
+import com.tomaszrykala.dorefindmi.domain.Led
 import java.io.IOException
 import java.util.*
 

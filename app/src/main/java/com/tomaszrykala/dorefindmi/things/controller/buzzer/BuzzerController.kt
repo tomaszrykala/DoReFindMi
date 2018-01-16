@@ -1,6 +1,6 @@
 package com.tomaszrykala.dorefindmi.things.controller.buzzer
 
-import com.tomaszrykala.dorefindmi.model.Note
+import com.tomaszrykala.dorefindmi.domain.Note
 import com.tomaszrykala.dorefindmi.things.controller.BaseController
 import com.tomaszrykala.dorefindmi.things.supplier.buzzer.BuzzerSupplier
 

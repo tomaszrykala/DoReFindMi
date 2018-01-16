@@ -1,6 +1,6 @@
 package com.tomaszrykala.dorefindmi.game
 
-import com.tomaszrykala.dorefindmi.model.AbcButton
+import com.tomaszrykala.dorefindmi.domain.AbcButton
 import com.tomaszrykala.dorefindmi.things.controller.abcbuttons.AbcButtonsController
 import com.tomaszrykala.dorefindmi.things.controller.abcleds.AbcLedsController
 import com.tomaszrykala.dorefindmi.things.controller.digidisplay.DigiDisplayController

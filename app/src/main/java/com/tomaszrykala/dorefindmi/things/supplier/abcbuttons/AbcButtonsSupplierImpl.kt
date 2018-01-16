@@ -2,7 +2,7 @@ package com.tomaszrykala.dorefindmi.things.supplier.abcbuttons
 
 import com.google.android.things.contrib.driver.button.Button
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat
-import com.tomaszrykala.dorefindmi.model.AbcButton
+import com.tomaszrykala.dorefindmi.domain.AbcButton
 
 class AbcButtonsSupplierImpl : AbcButtonsSupplier {
 

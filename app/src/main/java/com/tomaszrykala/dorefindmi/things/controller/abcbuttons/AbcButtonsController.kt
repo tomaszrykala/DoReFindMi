@@ -1,6 +1,6 @@
 package com.tomaszrykala.dorefindmi.things.controller.abcbuttons
 
-import com.tomaszrykala.dorefindmi.model.AbcButton
+import com.tomaszrykala.dorefindmi.domain.AbcButton
 import com.tomaszrykala.dorefindmi.things.controller.BaseController
 import com.tomaszrykala.dorefindmi.things.supplier.abcbuttons.AbcButtonsSupplier
 

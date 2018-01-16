@@ -1,6 +1,6 @@
 package com.tomaszrykala.dorefindmi.things.controller.ledstrip
 
-import com.tomaszrykala.dorefindmi.model.Led
+import com.tomaszrykala.dorefindmi.domain.Led
 import com.tomaszrykala.dorefindmi.things.controller.BaseController
 import com.tomaszrykala.dorefindmi.things.supplier.ledstrip.LedStripSupplier
 

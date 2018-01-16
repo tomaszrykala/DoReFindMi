@@ -1,8 +1,9 @@
 package com.tomaszrykala.dorefindmi.game
 
 import com.tomaszrykala.dorefindmi.game.generator.Generator
-import com.tomaszrykala.dorefindmi.model.AbcButton
-import com.tomaszrykala.dorefindmi.model.Note
+import com.tomaszrykala.dorefindmi.domain.AbcButton
+import com.tomaszrykala.dorefindmi.domain.Note
+import com.tomaszrykala.dorefindmi.domain.Step
 import com.tomaszrykala.dorefindmi.things.controller.buzzer.BuzzerController
 import com.tomaszrykala.dorefindmi.things.controller.ledstrip.LedStripController
 import java.util.concurrent.LinkedBlockingQueue

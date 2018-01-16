@@ -1,4 +1,4 @@
-package com.tomaszrykala.dorefindmi.model
+package com.tomaszrykala.dorefindmi.domain
 
 import android.graphics.Color
 import android.support.annotation.ColorInt

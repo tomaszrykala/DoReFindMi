@@ -1,4 +1,4 @@
-package com.tomaszrykala.dorefindmi.model
+package com.tomaszrykala.dorefindmi.domain
 
 enum class Note(val led: Led, val order: Int, val pitch: Double) {
     DO_LO(Led.ZERO, 0, 261.626), RE(Led.ONE, 1, 293.665), MI(Led.TWO, 2, 329.628),
