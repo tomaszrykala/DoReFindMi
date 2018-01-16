@@ -19,67 +19,67 @@ import com.tomaszrykala.dorefindmi.things.supplier.abcleds.MockAbcLedsSupplier
 import com.tomaszrykala.dorefindmi.things.supplier.buzzer.MockBuzzerSupplier
 import com.tomaszrykala.dorefindmi.things.supplier.digidisplay.MockDigiDisplaySupplier
 import com.tomaszrykala.dorefindmi.things.supplier.ledstrip.MockLedStripSupplier
-import junit.framework.Assert.*
+import org.junit.Assert.*
 import org.junit.Test
 
 class DoReFindMiTests {
 
     @Test
     @Throws(Exception::class)
-    fun testNotes() {
-        assertEquals(261.626, DO_LO.pitch)
+    fun notesShouldHaveExpectedValues() {
+        assertEquals(261.626, DO_LO.pitch, 0.0)
         assertEquals(0, DO_LO.order)
         assertEquals(Color.YELLOW, DO_LO.led.color)
 
-        assertEquals(293.665, RE.pitch)
+        assertEquals(293.665, RE.pitch, 0.0)
         assertEquals(1, RE.order)
         assertEquals(Color.GREEN, RE.led.color)
 
-        assertEquals(329.628, MI.pitch)
+        assertEquals(329.628, MI.pitch, 0.0)
         assertEquals(2, MI.order)
         assertEquals(Color.CYAN, MI.led.color)
 
-        assertEquals(349.228, FA.pitch)
+        assertEquals(349.228, FA.pitch, 0.0)
         assertEquals(3, FA.order)
         assertEquals(Color.BLUE, FA.led.color)
 
-        assertEquals(391.995, SO.pitch)
+        assertEquals(391.995, SO.pitch, 0.0)
         assertEquals(4, SO.order)
         assertEquals(Color.LTGRAY, SO.led.color)
 
-        assertEquals(440.0, LA.pitch)
+        assertEquals(440.0, LA.pitch, 0.0)
         assertEquals(5, LA.order)
         assertEquals(Color.MAGENTA, LA.led.color)
 
-        assertEquals(493.883, SI.pitch)
+        assertEquals(493.883, SI.pitch, 0.0)
         assertEquals(6, SI.order)
         assertEquals(Color.RED, SI.led.color)
 
-        assertEquals(523.251, DO_HI.pitch)
+        assertEquals(523.251, DO_HI.pitch, 0.0)
         assertEquals(7, DO_HI.order)
         assertEquals(Color.WHITE, DO_HI.led.color)
 
-        assertEquals(110.0, MISS.pitch)
+        assertEquals(110.0, MISS.pitch, 0.0)
         assertEquals(-1, MISS.order)
         assertEquals(Color.BLACK, MISS.led.color)
     }
 
     @Test
-    fun testPads() {
+    fun padsShouldHaveExpectedValues() {
         assertEquals("A", AbcButton.A.value)
         assertEquals("B", AbcButton.B.value)
         assertEquals("C", AbcButton.C.value)
     }
 
     @Test
-    fun testSteps() {
+    fun stepShouldHaveExpectedValues() {
         val step = Step(AbcButton.A, DO_LO)
         assertEquals(AbcButton.A, step.abcButton)
         assertEquals(DO_LO, step.note)
     }
 
     @Test
-    fun testStepsGenerator() {
+    fun stepGeneratorShouldGenerateExpectedSteps() {
         val steps = MockGenerator().steps
         assertEquals(8, steps.size)
         assertEquals(DO_LO, steps[0].note)
@@ -93,7 +93,7 @@ class DoReFindMiTests {
     }
 
     @Test
-    fun testGame_wonInOne() {
+    fun gameShouldHaveCorrectStateWhenGameIsWon() {
         val ledStripController = LedStripController(MockLedStripSupplier())
         val buzzerController = BuzzerController(MockBuzzerSupplier())
         val mockGenerator = MockGenerator()
@@ -116,7 +116,7 @@ class DoReFindMiTests {
     }
 
     @Test
-    fun testGameController_whenWon() {
+    fun gameControllerShouldHaveCorrectStateWhenGameIsWon() {
         val abcButtonsController = AbcButtonsController(MockAbcButtonsSupplier())
         val digiDisplayController = NonBlockingDigiDisplayController(MockDigiDisplaySupplier())
         val mockGenerator = MockGenerator()
@@ -156,7 +156,7 @@ class DoReFindMiTests {
     }
 
     @Test
-    fun testGameController_whenHitMissHitHitMissWon() {
+    fun gameControllerShouldHaveCorrectStateWhenGameIsWonAfterAFewMisses() {
         val mockGenerator = MockGenerator()
         val abcButtonsController = AbcButtonsController(MockAbcButtonsSupplier())
         val digiDisplayController = NonBlockingDigiDisplayController(MockDigiDisplaySupplier())

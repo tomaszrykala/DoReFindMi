@@ -5,11 +5,17 @@ import com.tomaszrykala.dorefindmi.things.controller.BaseController
 import com.tomaszrykala.dorefindmi.things.supplier.abcbuttons.AbcButtonsSupplier
 
 class AbcButtonsController(private val supplier: AbcButtonsSupplier) : BaseController, AbcButtonsSupplier.Listener {
-    private var listener: AbcButton.Listener? = null
+
+    private lateinit var listener: AbcButton.Listener
+    private var lastPressed: AbcButton? = null
+
+    init {
+        supplier.setListener(this)
+        supplier.init()
+    }
 
     var isEnabled: Boolean = false
         private set
-    private var lastPressed: AbcButton? = null
 
     fun setListener(listener: AbcButton.Listener) {
         this.listener = listener
@@ -31,18 +37,9 @@ class AbcButtonsController(private val supplier: AbcButtonsSupplier) : BaseContr
 
     fun hasLastPressed(): Boolean = lastPressed != null
 
-    init {
-        supplier.setListener(this)
-        supplier.init()
-    }
-
     override fun onButtonEvent(abcButton: AbcButton, pressed: Boolean) {
         if (pressed) {
-            when (abcButton) {
-                AbcButton.A -> listener!!.onAbcButton(AbcButton.A)
-                AbcButton.B -> listener!!.onAbcButton(AbcButton.B)
-                AbcButton.C -> listener!!.onAbcButton(AbcButton.C)
-            }
+            listener.onAbcButton(abcButton)
         }
     }
 

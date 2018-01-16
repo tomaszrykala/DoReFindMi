@@ -4,12 +4,23 @@ import com.tomaszrykala.dorefindmi.model.AbcButton
 import com.tomaszrykala.dorefindmi.things.controller.abcbuttons.AbcButtonsController
 import com.tomaszrykala.dorefindmi.things.controller.abcleds.AbcLedsController
 import com.tomaszrykala.dorefindmi.things.controller.digidisplay.DigiDisplayController
+import java.util.concurrent.TimeUnit
+
+const val HALF_A_SECOND_IN_MILLIS = 500
 
 class GameController(private val abcButtons: AbcButtonsController,
                      private val abcLeds: AbcLedsController,
                      private val digiDisplay: DigiDisplayController,
                      private val timer: Timer,
                      private val game: Game) : AbcButton.Listener {
+
+    private val closeables: List<AutoCloseable> = listOf(abcButtons, abcLeds, digiDisplay)
+
+    val isStarted: Boolean
+        get() = game.isStarted
+
+    val isWon: Boolean
+        get() = game.isWon
 
     init {
         abcButtons.setListener(this)
@@ -39,21 +50,24 @@ class GameController(private val abcButtons: AbcButtonsController,
     }
 
     private fun startNewRound() {
-        game.reset()
         startRound()
     }
 
     private fun showStarter() {
-        val halfASecond = 500
-        digiDisplay.displayBlocking("3...", halfASecond)
-        digiDisplay.displayBlocking("2...", halfASecond)
-        digiDisplay.displayBlocking("1...", halfASecond)
-        digiDisplay.displayBlocking(" GO ", halfASecond)
+        digiDisplay.apply {
+            (3 downTo 1).forEach {
+                displayBlocking(String.format("%d...", it), HALF_A_SECOND_IN_MILLIS)
+            }.also {
+                displayBlocking(" GO ", HALF_A_SECOND_IN_MILLIS)
+            }
+        }
     }
 
     private fun start() {
-        abcButtons.setLastPressed(null)
-        abcButtons.enable()
+        abcButtons.apply {
+            setLastPressed(null)
+            enable()
+        }
         abcLeds.reset()
         game.start()
     }
@@ -61,21 +75,15 @@ class GameController(private val abcButtons: AbcButtonsController,
     private fun stop() {
         timer.stop()
         abcButtons.disable()
-        digiDisplay.displayBlocking("WIN ", 2000)
-        digiDisplay.display(digiDisplay.counter)
+        digiDisplay.apply {
+            displayBlocking("WIN ", TimeUnit.SECONDS.toMillis(2).toInt())
+            display(digiDisplay.counter)
+        }
     }
-
-    val isStarted: Boolean
-        get() = game.isStarted
-
-    val isWon: Boolean
-        get() = game.isWon
 
     fun onDestroy() {
         try {
-            abcButtons.close()
-            abcLeds.close()
-            digiDisplay.close()
+            closeables.forEach { it.close() }
             game.onDestroy()
         } catch (e: Exception) {
             e.printStackTrace()

@@ -9,34 +9,23 @@ import java.util.concurrent.LinkedBlockingQueue
 
 class Game(private val ledStripController: LedStripController,
            private val buzzerController: BuzzerController,
-           private val generator: Generator) {
+           generator: Generator) {
 
     private val stepQueue = LinkedBlockingQueue<Step>()
+    private val steps: List<Step> = generator.steps
 
-    private var steps: List<Step>? = null
     var isStarted: Boolean = false
         private set
+
     var isWon: Boolean = false
         private set
 
-    init {
-        setRoundSteps()
-    }
-
-    private fun setRoundSteps() {
-        steps = generator.steps
-    }
-
     fun start() {
         stepQueue.clear()
-        stepQueue.addAll(steps!!)
+        stepQueue.addAll(steps)
         ledStripController.reset()
         isStarted = true
         isWon = false
-    }
-
-    internal fun reset() {
-        setRoundSteps()
     }
 
     fun onPad(abcButton: AbcButton): Boolean {

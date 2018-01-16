@@ -1,7 +1,7 @@
 package com.tomaszrykala.dorefindmi.model
 
-enum class AbcLed constructor(val value: String) {
-    A("A"), B("B"), C("C");
+enum class AbcLed {
+    A, B, C;
 
     interface Listener {
         fun lightFor(abcButton: AbcButton)
