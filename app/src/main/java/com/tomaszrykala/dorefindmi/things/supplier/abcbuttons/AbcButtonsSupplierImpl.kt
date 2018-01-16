@@ -14,7 +14,7 @@ class AbcButtonsSupplierImpl : AbcButtonsSupplier {
 
     private lateinit var listener: AbcButtonsSupplier.Listener
 
-    override fun init() {
+    init {
         buttons.keys.forEach { it.setOnButtonEventListener(this) }
     }
 

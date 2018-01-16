@@ -2,10 +2,6 @@ package com.tomaszrykala.dorefindmi.things.supplier.abcleds
 
 class MockAbcLedsSupplier : AbcLedsSupplier {
 
-    override fun init() {
-        println("MockAbcLedsSupplier.init")
-    }
-
     @Throws(Exception::class)
     override fun close() {
         println("MockAbcLedsSupplier.close")

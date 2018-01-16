@@ -11,11 +11,12 @@ import java.util.*
 class LedStripSupplierImpl : LedStripSupplier {
 
     private val ledColorHashMap = HashMap<Led, Boolean>(LEDSTRIP_LENGTH)
-    private val apa102: Apa102 by lazy { RainbowHat.openLedStrip() }
 
-    override fun init() {
-        apa102.direction = Apa102.Direction.REVERSED
-        apa102.brightness = 7
+    private val apa102: Apa102 by lazy {
+        RainbowHat.openLedStrip().apply {
+            direction = Apa102.Direction.REVERSED
+            brightness = 7
+        }
     }
 
     override fun isLitAt(led: Led): Boolean {

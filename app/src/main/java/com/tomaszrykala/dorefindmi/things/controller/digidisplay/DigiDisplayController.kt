@@ -5,14 +5,12 @@ import com.tomaszrykala.dorefindmi.things.controller.BaseController
 import com.tomaszrykala.dorefindmi.things.supplier.digidisplay.DigiDisplaySupplier
 
 open class DigiDisplayController(private val supplier: DigiDisplaySupplier) : BaseController, Timer.Listener {
+
     var isRunning: Boolean = false
         private set
-    var counter: Double = 0.toDouble()
-        private set
 
-    init {
-        supplier.init()
-    }
+    var counter: Double = 0.0
+        private set
 
     override fun onTick(tick: Double) {
         counter = tick

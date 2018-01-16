@@ -6,10 +6,6 @@ import com.tomaszrykala.dorefindmi.things.supplier.ledstrip.LedStripSupplier
 
 class LedStripController(private val supplier: LedStripSupplier) : BaseController {
 
-    init {
-        supplier.init()
-    }
-
     fun isLitAt(led: Led): Boolean = supplier.isLitAt(led)
 
     fun light(led: Led) {

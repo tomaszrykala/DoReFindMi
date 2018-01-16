@@ -11,7 +11,6 @@ class AbcButtonsController(private val supplier: AbcButtonsSupplier) : BaseContr
 
     init {
         supplier.setListener(this)
-        supplier.init()
     }
 
     var isEnabled: Boolean = false

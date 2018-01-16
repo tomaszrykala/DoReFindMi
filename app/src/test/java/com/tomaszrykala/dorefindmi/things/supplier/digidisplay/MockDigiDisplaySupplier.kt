@@ -2,10 +2,6 @@ package com.tomaszrykala.dorefindmi.things.supplier.digidisplay
 
 class MockDigiDisplaySupplier : DigiDisplaySupplier {
 
-    override fun init() {
-        println("MockDigiDisplaySupplier.init")
-    }
-
     override fun display(n: Double) {
         println("MockDigiDisplaySupplier.display: " + n)
     }

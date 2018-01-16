@@ -9,10 +9,6 @@ class AbcLedsController(private val supplier: AbcLedsSupplier) : BaseController,
 
     private val lit = booleanArrayOf(false, false, false)
 
-    init {
-        supplier.init()
-    }
-
     fun isLitAt(abcLed: AbcLed): Boolean = when (abcLed) {
         AbcLed.A -> lit[0]
         AbcLed.B -> lit[1]

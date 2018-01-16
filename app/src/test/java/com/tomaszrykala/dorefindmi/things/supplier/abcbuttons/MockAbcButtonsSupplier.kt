@@ -4,10 +4,6 @@ import com.google.android.things.contrib.driver.button.Button
 
 class MockAbcButtonsSupplier : AbcButtonsSupplier {
 
-    override fun init() {
-        println("MockAbcButtonsSupplier.init")
-    }
-
     override fun setListener(listener: AbcButtonsSupplier.Listener) {
         println("MockAbcButtonsSupplier.setListener")
     }
