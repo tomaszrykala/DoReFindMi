@@ -6,16 +6,16 @@ import com.tomaszrykala.dorefindmi.domain.AbcButton
 
 class AbcButtonsSupplierImpl : AbcButtonsSupplier {
 
-    private val buttonA: Button by lazy { RainbowHat.openButtonA() }
-    private val buttonB: Button by lazy { RainbowHat.openButtonB() }
-    private val buttonC: Button by lazy { RainbowHat.openButtonC() }
+    private val buttons: Map<Button, AbcButton> = mapOf(
+            RainbowHat.openButtonA() to AbcButton.A,
+            RainbowHat.openButtonB() to AbcButton.B,
+            RainbowHat.openButtonC() to AbcButton.C
+    )
 
     private lateinit var listener: AbcButtonsSupplier.Listener
 
     override fun init() {
-        buttonA.setOnButtonEventListener(this)
-        buttonB.setOnButtonEventListener(this)
-        buttonC.setOnButtonEventListener(this)
+        buttons.keys.forEach { it.setOnButtonEventListener(this) }
     }
 
     override fun setListener(listener: AbcButtonsSupplier.Listener) {
@@ -23,17 +23,11 @@ class AbcButtonsSupplierImpl : AbcButtonsSupplier {
     }
 
     override fun onButtonEvent(button: Button, pressed: Boolean) {
-        when (button) {
-            buttonA -> listener.onButtonEvent(AbcButton.A, pressed)
-            buttonB -> listener.onButtonEvent(AbcButton.B, pressed)
-            buttonC -> listener.onButtonEvent(AbcButton.C, pressed)
-        }
+        buttons[button]?.let { listener.onButtonEvent(it, pressed) }
     }
 
     @Throws(Exception::class)
     override fun close() {
-        buttonA.close()
-        buttonB.close()
-        buttonC.close()
+        buttons.keys.forEach { it.close() }
     }
 }

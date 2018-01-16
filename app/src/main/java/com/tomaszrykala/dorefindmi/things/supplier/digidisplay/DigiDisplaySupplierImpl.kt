@@ -11,13 +11,9 @@ class DigiDisplaySupplierImpl : DigiDisplaySupplier {
     private val alphanumericDisplay: AlphanumericDisplay by lazy { RainbowHat.openDisplay() }
 
     override fun init() {
-        try {
-            alphanumericDisplay.apply {
-                setBrightness(Ht16k33.HT16K33_BRIGHTNESS_MAX)
-                setEnabled(true)
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
+        alphanumericDisplay.apply {
+            setBrightness(Ht16k33.HT16K33_BRIGHTNESS_MAX)
+            setEnabled(true)
         }
     }
 

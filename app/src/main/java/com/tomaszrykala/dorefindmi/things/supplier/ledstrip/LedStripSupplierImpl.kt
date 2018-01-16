@@ -14,12 +14,8 @@ class LedStripSupplierImpl : LedStripSupplier {
     private val apa102: Apa102 by lazy { RainbowHat.openLedStrip() }
 
     override fun init() {
-        try {
-            apa102.direction = Apa102.Direction.REVERSED
-            apa102.brightness = 7
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+        apa102.direction = Apa102.Direction.REVERSED
+        apa102.brightness = 7
     }
 
     override fun isLitAt(led: Led): Boolean {
