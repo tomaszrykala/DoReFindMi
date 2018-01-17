@@ -1,26 +1,28 @@
 package com.tomaszrykala.dorefindmi.game.generator
 
-import com.tomaszrykala.dorefindmi.game.Step
-import com.tomaszrykala.dorefindmi.model.AbcButton
-import com.tomaszrykala.dorefindmi.model.Note
+import com.tomaszrykala.dorefindmi.domain.AbcButton
+import com.tomaszrykala.dorefindmi.domain.Note
+import com.tomaszrykala.dorefindmi.domain.Step
 import java.util.*
+import kotlin.collections.ArrayList
 
 class GeneratorImpl : Generator {
 
-    private val BUTTONS = arrayOf(AbcButton.A, AbcButton.B, AbcButton.C)
+    private val buttons = arrayOf(AbcButton.A, AbcButton.B, AbcButton.C)
 
     private val notes: List<Note>
-        get() = ArrayList(Arrays.asList(Note.DO_LO, Note.RE, Note.MI, Note.FA, Note.SO, Note.LA, Note.SI, Note.DO_HI))
+        get() = arrayOf(Note.DO_LO, Note.RE, Note.MI, Note.FA, Note.SO, Note.LA, Note.SI, Note.DO_HI).asList()
 
     override val steps: List<Step>
         get() {
             val steps = LinkedList<Step>()
-            val notes = notes as MutableList
+            val mutableNotes = ArrayList(notes)
             val random = Random()
-            while (!notes.isEmpty()) {
-                val nextInt = random.nextInt(BUTTONS.size)
-                val abcButton = BUTTONS[nextInt]
-                val note = notes.removeAt(random.nextInt(notes.size))
+            while (!mutableNotes.isEmpty()) {
+                val nextButton = random.nextInt(buttons.size)
+                val abcButton = buttons[nextButton]
+                val nextNote = random.nextInt(mutableNotes.size)
+                val note = mutableNotes.removeAt(nextNote)
                 steps.add(Step(abcButton, note))
             }
 

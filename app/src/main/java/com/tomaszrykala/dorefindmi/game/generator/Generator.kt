@@ -1,6 +1,6 @@
 package com.tomaszrykala.dorefindmi.game.generator
 
-import com.tomaszrykala.dorefindmi.game.Step
+import com.tomaszrykala.dorefindmi.domain.Step
 
 interface Generator {
 

@@ -4,21 +4,18 @@ import android.graphics.Color
 import com.google.android.things.contrib.driver.apa102.Apa102
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat
 import com.google.android.things.contrib.driver.rainbowhat.RainbowHat.LEDSTRIP_LENGTH
-import com.tomaszrykala.dorefindmi.model.Led
+import com.tomaszrykala.dorefindmi.domain.Led
 import java.io.IOException
 import java.util.*
 
 class LedStripSupplierImpl : LedStripSupplier {
 
     private val ledColorHashMap = HashMap<Led, Boolean>(LEDSTRIP_LENGTH)
-    private val apa102: Apa102 by lazy { RainbowHat.openLedStrip() }
 
-    override fun init() {
-        try {
-            apa102.direction = Apa102.Direction.REVERSED
-            apa102.brightness = 7
-        } catch (e: IOException) {
-            e.printStackTrace()
+    private val apa102: Apa102 by lazy {
+        RainbowHat.openLedStrip().apply {
+            direction = Apa102.Direction.REVERSED
+            brightness = 7
         }
     }
 

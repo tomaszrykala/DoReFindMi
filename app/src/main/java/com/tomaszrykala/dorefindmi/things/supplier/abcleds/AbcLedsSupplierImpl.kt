@@ -11,8 +11,6 @@ class AbcLedsSupplierImpl : AbcLedsSupplier {
     private val ledB: Gpio by lazy { RainbowHat.openLedGreen() }
     private val ledC: Gpio by lazy { RainbowHat.openLedBlue() }
 
-    override fun init() {}
-
     override fun lightFor(onPadA: Boolean, onPadB: Boolean, onPadC: Boolean) {
         try {
             ledA.value = onPadA

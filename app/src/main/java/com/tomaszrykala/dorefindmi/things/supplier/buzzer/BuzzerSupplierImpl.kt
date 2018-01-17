@@ -16,9 +16,8 @@ class BuzzerSupplierImpl : BuzzerSupplier {
         handlerThread.start()
         Handler(handlerThread.looper)
     }
-    private val handlerThread: HandlerThread = HandlerThread("BuzzerSupplierImpl")
 
-    override fun init() {}
+    private val handlerThread: HandlerThread = HandlerThread("BuzzerSupplierImpl")
 
     override fun play(pitch: Double) {
         handler.post {

@@ -1,42 +1,32 @@
 package com.tomaszrykala.dorefindmi.game
 
 import com.tomaszrykala.dorefindmi.game.generator.Generator
-import com.tomaszrykala.dorefindmi.model.AbcButton
-import com.tomaszrykala.dorefindmi.model.Note
+import com.tomaszrykala.dorefindmi.domain.AbcButton
+import com.tomaszrykala.dorefindmi.domain.Note
+import com.tomaszrykala.dorefindmi.domain.Step
 import com.tomaszrykala.dorefindmi.things.controller.buzzer.BuzzerController
 import com.tomaszrykala.dorefindmi.things.controller.ledstrip.LedStripController
 import java.util.concurrent.LinkedBlockingQueue
 
 class Game(private val ledStripController: LedStripController,
            private val buzzerController: BuzzerController,
-           private val generator: Generator) {
+           generator: Generator) {
 
     private val stepQueue = LinkedBlockingQueue<Step>()
+    private val steps: List<Step> = generator.steps
 
-    private var steps: List<Step>? = null
     var isStarted: Boolean = false
         private set
+
     var isWon: Boolean = false
         private set
 
-    init {
-        setRoundSteps()
-    }
-
-    private fun setRoundSteps() {
-        steps = generator.steps
-    }
-
     fun start() {
         stepQueue.clear()
-        stepQueue.addAll(steps!!)
+        stepQueue.addAll(steps)
         ledStripController.reset()
         isStarted = true
         isWon = false
-    }
-
-    internal fun reset() {
-        setRoundSteps()
     }
 
     fun onPad(abcButton: AbcButton): Boolean {

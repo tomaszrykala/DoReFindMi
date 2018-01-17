@@ -1,12 +1,8 @@
 package com.tomaszrykala.dorefindmi.things.supplier.ledstrip
 
-import com.tomaszrykala.dorefindmi.model.Led
+import com.tomaszrykala.dorefindmi.domain.Led
 
 class MockLedStripSupplier : LedStripSupplier {
-
-    override fun init() {
-        println("MockLedStripSupplier.init")
-    }
 
     override fun isLitAt(led: Led): Boolean {
         println("MockLedStripSupplier.isLitAt")

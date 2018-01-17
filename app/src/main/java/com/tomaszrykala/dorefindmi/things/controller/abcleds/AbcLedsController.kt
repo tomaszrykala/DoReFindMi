@@ -1,17 +1,13 @@
 package com.tomaszrykala.dorefindmi.things.controller.abcleds
 
-import com.tomaszrykala.dorefindmi.model.AbcButton
-import com.tomaszrykala.dorefindmi.model.AbcLed
+import com.tomaszrykala.dorefindmi.domain.AbcButton
+import com.tomaszrykala.dorefindmi.domain.AbcLed
 import com.tomaszrykala.dorefindmi.things.controller.BaseController
 import com.tomaszrykala.dorefindmi.things.supplier.abcleds.AbcLedsSupplier
 
 class AbcLedsController(private val supplier: AbcLedsSupplier) : BaseController, AbcLed.Listener {
 
     private val lit = booleanArrayOf(false, false, false)
-
-    init {
-        supplier.init()
-    }
 
     fun isLitAt(abcLed: AbcLed): Boolean = when (abcLed) {
         AbcLed.A -> lit[0]

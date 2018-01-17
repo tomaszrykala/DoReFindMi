@@ -37,7 +37,7 @@ class Timer(private val listener: Timer.Listener) {
         handler.reset()
     }
 
-    internal class CountUpHandler(private val timer: Timer) : Handler() {
+    class CountUpHandler(private val timer: Timer) : Handler() {
 
         private var base: Int = 0
 

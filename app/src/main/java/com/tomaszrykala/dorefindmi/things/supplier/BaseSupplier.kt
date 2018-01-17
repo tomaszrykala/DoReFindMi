@@ -1,6 +1,3 @@
 package com.tomaszrykala.dorefindmi.things.supplier
 
-interface BaseSupplier : AutoCloseable {
-
-    fun init()
-}
+interface BaseSupplier : AutoCloseable
