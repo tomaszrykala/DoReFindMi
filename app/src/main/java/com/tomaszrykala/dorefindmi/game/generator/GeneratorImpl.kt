@@ -1,9 +1,10 @@
 package com.tomaszrykala.dorefindmi.game.generator
 
-import com.tomaszrykala.dorefindmi.domain.Step
 import com.tomaszrykala.dorefindmi.domain.AbcButton
 import com.tomaszrykala.dorefindmi.domain.Note
+import com.tomaszrykala.dorefindmi.domain.Step
 import java.util.*
+import kotlin.collections.ArrayList
 
 class GeneratorImpl : Generator {
 
@@ -15,12 +16,13 @@ class GeneratorImpl : Generator {
     override val steps: List<Step>
         get() {
             val steps = LinkedList<Step>()
-            val notes = notes as MutableList
+            val mutableNotes = ArrayList(notes)
             val random = Random()
-            while (!notes.isEmpty()) {
-                val nextInt = random.nextInt(buttons.size)
-                val abcButton = buttons[nextInt]
-                val note = notes.removeAt(random.nextInt(notes.size))
+            while (!mutableNotes.isEmpty()) {
+                val nextButton = random.nextInt(buttons.size)
+                val abcButton = buttons[nextButton]
+                val nextNote = random.nextInt(mutableNotes.size)
+                val note = mutableNotes.removeAt(nextNote)
                 steps.add(Step(abcButton, note))
             }
 
