@@ -1,14 +1,14 @@
 package com.tomaszrykala.dorefindmi
 
 import android.graphics.Color
-import com.tomaszrykala.dorefindmi.game.Game
-import com.tomaszrykala.dorefindmi.game.GameController
-import com.tomaszrykala.dorefindmi.domain.Step
-import com.tomaszrykala.dorefindmi.game.Timer
-import com.tomaszrykala.dorefindmi.game.generator.MockGenerator
 import com.tomaszrykala.dorefindmi.domain.AbcButton
 import com.tomaszrykala.dorefindmi.domain.AbcLed
 import com.tomaszrykala.dorefindmi.domain.Note.*
+import com.tomaszrykala.dorefindmi.domain.Step
+import com.tomaszrykala.dorefindmi.game.Game
+import com.tomaszrykala.dorefindmi.game.GameController
+import com.tomaszrykala.dorefindmi.game.Timer
+import com.tomaszrykala.dorefindmi.game.generator.MockGenerator
 import com.tomaszrykala.dorefindmi.things.controller.abcbuttons.AbcButtonsController
 import com.tomaszrykala.dorefindmi.things.controller.abcleds.AbcLedsController
 import com.tomaszrykala.dorefindmi.things.controller.buzzer.BuzzerController
