@@ -1,5 +1,6 @@
 package com.tomaszrykala.dorefindmi.things.controller.abcbuttons
 
+import android.support.annotation.VisibleForTesting
 import com.tomaszrykala.dorefindmi.domain.AbcButton
 import com.tomaszrykala.dorefindmi.things.controller.BaseController
 import com.tomaszrykala.dorefindmi.things.supplier.abcbuttons.AbcButtonsSupplier
@@ -28,13 +29,9 @@ class AbcButtonsController(private val supplier: AbcButtonsSupplier) : BaseContr
         isEnabled = false
     }
 
-    fun isLastPressed(abcButton: AbcButton): Boolean = lastPressed === abcButton
-
     fun setLastPressed(abcButton: AbcButton?) {
         lastPressed = abcButton
     }
-
-    fun hasLastPressed(): Boolean = lastPressed != null
 
     override fun onButtonEvent(abcButton: AbcButton, pressed: Boolean) {
         if (pressed) {
@@ -46,4 +43,10 @@ class AbcButtonsController(private val supplier: AbcButtonsSupplier) : BaseContr
     override fun close() {
         supplier.close()
     }
+
+    @VisibleForTesting
+    fun isLastPressed(abcButton: AbcButton): Boolean = lastPressed === abcButton
+
+    @VisibleForTesting
+    fun hasLastPressed(): Boolean = lastPressed != null
 }
