@@ -19,11 +19,7 @@ class LedStripSupplierImpl : LedStripSupplier {
     override fun light(colors: IntArray) {
         val writeColors = IntArray(colors.size)
         colors.forEachIndexed { index, color ->
-            if (color == TURN_OFF_COLOR) {
-                writeColors[index] = Color.BLACK
-            } else {
-                writeColors[index] = color
-            }
+            writeColors[index] = if (color == TURN_OFF_COLOR) Color.BLACK else color
         }
 
         try {
