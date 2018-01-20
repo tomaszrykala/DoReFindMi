@@ -9,12 +9,13 @@ import java.util.*
 
 class LedStripController(private val supplier: LedStripSupplier) : BaseController {
 
-    private val ledColorHashMap = HashMap<Led, Boolean>(supplier.getLength())
+    private val leds = Led.values().filterNot { it == Led.NONE || it == Led.ALL }
+    private val ledStates = HashMap<Led, Boolean>(supplier.getLength())
 
     fun light(led: Led) {
         when (led) {
             Led.ALL -> putAll(true)
-            else -> ledColorHashMap.put(led, true)
+            else -> ledStates.put(led, true)
         }
         light()
     }
@@ -25,21 +26,15 @@ class LedStripController(private val supplier: LedStripSupplier) : BaseControlle
     }
 
     private fun light() {
-        val colors = IntArray(ledColorHashMap.size)
-        for (led in ledColorHashMap.keys) {
-            colors[led.index] = if (ledColorHashMap[led] as Boolean) led.color else TURN_OFF_COLOR
+        val colors = IntArray(ledStates.size)
+        for (led in ledStates.keys) {
+            colors[led.index] = if (ledStates[led] as Boolean) led.color else TURN_OFF_COLOR
         }
         supplier.light(colors)
     }
 
     private fun putAll(all: Boolean) {
-        ledColorHashMap.put(Led.ZERO, all)
-        ledColorHashMap.put(Led.ONE, all)
-        ledColorHashMap.put(Led.TWO, all)
-        ledColorHashMap.put(Led.THREE, all)
-        ledColorHashMap.put(Led.FOUR, all)
-        ledColorHashMap.put(Led.FIVE, all)
-        ledColorHashMap.put(Led.SIX, all)
+        leds.forEach { ledStates.put(it, all) }
     }
 
     @Throws(Exception::class)
@@ -53,9 +48,9 @@ class LedStripController(private val supplier: LedStripSupplier) : BaseControlle
     @VisibleForTesting
     fun isLitAt(led: Led): Boolean {
         return if (led == Led.ALL) {
-            ledColorHashMap.filterValues { !it }.isEmpty()
+            ledStates.filterValues { !it }.isEmpty()
         } else {
-            ledColorHashMap[led] as Boolean
+            ledStates[led] as Boolean
         }
     }
 }

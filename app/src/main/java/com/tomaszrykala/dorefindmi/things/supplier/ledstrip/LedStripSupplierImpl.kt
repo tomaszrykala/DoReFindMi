@@ -17,9 +17,17 @@ class LedStripSupplierImpl : LedStripSupplier {
     override fun getLength(): Int = RainbowHat.LEDSTRIP_LENGTH
 
     override fun light(colors: IntArray) {
-        colors.map { TURN_OFF_COLOR to Color.BLACK }
+        val writeColors = IntArray(colors.size)
+        colors.forEachIndexed { index, color ->
+            if (color == TURN_OFF_COLOR) {
+                writeColors[index] = Color.BLACK
+            } else {
+                writeColors[index] = color
+            }
+        }
+
         try {
-            apa102.write(colors)
+            apa102.write(writeColors)
         } catch (e: IOException) {
             e.printStackTrace()
         }
