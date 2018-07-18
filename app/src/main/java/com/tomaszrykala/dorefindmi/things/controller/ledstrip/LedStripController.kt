@@ -15,7 +15,7 @@ class LedStripController(private val supplier: LedStripSupplier) : BaseControlle
     fun light(led: Led) {
         when (led) {
             Led.ALL -> putAll(true)
-            else -> ledStates.put(led, true)
+            else -> ledStates[led] = true
         }
         light()
     }
@@ -34,7 +34,7 @@ class LedStripController(private val supplier: LedStripSupplier) : BaseControlle
     }
 
     private fun putAll(all: Boolean) {
-        leds.forEach { ledStates.put(it, all) }
+        leds.forEach { ledStates[it] = all }
     }
 
     @Throws(Exception::class)
